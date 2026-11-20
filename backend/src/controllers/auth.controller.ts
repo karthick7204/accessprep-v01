@@ -190,7 +190,7 @@ export async function postRegister(req: Request, res: Response) {
   const isBlind = pwdCategory === 'Visually Impaired' || Boolean(needScribe) || Boolean(req.body.isBlindMode);
   const initialSettings: AccessibilitySettings = {
     userId: newId,
-    theme: isBlind ? 'high_contrast_yellow' : 'sapphire',
+    theme: 'sapphire',
     fontScale: isBlind ? 150 : 125,
     dyslexiaFont: false,
     speechRate: 1.0,

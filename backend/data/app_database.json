@@ -194,6 +194,19 @@
       "examRegion": "Western Region (WR)",
       "examLanguage": "Hindi",
       "createdAt": "2026-11-19T03:49:46.992Z"
+    },
+    {
+      "id": "usr_1795184639789",
+      "rollNumber": "SSC-2026-MTS-9789",
+      "name": "ashwin",
+      "email": "ashwin@gmail.com",
+      "passwordHash": "53e97e96236a7f2b9680e29889401e2e916ab8fb04e54b16953b3440f3703653",
+      "role": "candidate",
+      "pwdCategory": "None",
+      "needScribe": false,
+      "examRegion": "Northern Region (NR)",
+      "examLanguage": "English",
+      "createdAt": "2026-11-20T14:23:59.820Z"
     }
   ],
   "practiceAttempts": [
@@ -409,6 +422,571 @@
     }
   ],
   "mockAttempts": [
+    {
+      "id": "mock_1795184667836_hi0hld",
+      "userId": "usr_1795184639789",
+      "examTitle": "SSC MTS 2026 Official Pattern Mock Examination #1",
+      "session1Score": 0,
+      "session2Score": 0,
+      "totalScore": 0,
+      "totalMax": 270,
+      "percentage": 0,
+      "qualified": false,
+      "totalTimeSeconds": 0,
+      "answers": {
+        "SSC-MTS-NUM-078": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-023": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-026": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-035": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-097": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-058": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-086": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-098": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-083": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-024": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-049": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-019": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-014": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-088": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-036": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-087": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-043": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-012": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-016": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-NUM-029": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-035": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-068": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-037": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-004": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-047": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-091": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-029": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-021": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-046": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-096": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-062": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-090": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-025": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-030": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-032": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-060": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-074": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-005": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-013": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-REA-008": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-033": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-008": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-013": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-043": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-036": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-055": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-002": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-064": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-096": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-070": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-086": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-022": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-071": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-100": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-084": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-007": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-056": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-060": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-029": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-050": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-042": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-024": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-077": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-019": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-GA-080": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-011": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-072": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-065": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-035": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-081": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-061": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-030": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-085": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-042": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-049": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-070": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-057": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-043": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-097": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-096": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-016": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-076": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-074": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-045": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-017": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-060": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-063": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-087": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-047": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        },
+        "SSC-MTS-ENG-090": {
+          "selectedOption": null,
+          "timeSpent": 0,
+          "markedForReview": false
+        }
+      },
+      "completedAt": "",
+      "cycleNumber": 1,
+      "attemptSequence": 1,
+      "status": "in_progress",
+      "totalQuestions": 90,
+      "answeredQuestions": 0,
+      "startedAt": "2026-11-20T14:24:27.836Z",
+      "remainingTime": 5400,
+      "currentQuestionIndex": 0,
+      "questionIds": [
+        "SSC-MTS-NUM-078",
+        "SSC-MTS-NUM-023",
+        "SSC-MTS-NUM-026",
+        "SSC-MTS-NUM-035",
+        "SSC-MTS-NUM-097",
+        "SSC-MTS-NUM-058",
+        "SSC-MTS-NUM-086",
+        "SSC-MTS-NUM-098",
+        "SSC-MTS-NUM-083",
+        "SSC-MTS-NUM-024",
+        "SSC-MTS-NUM-049",
+        "SSC-MTS-NUM-019",
+        "SSC-MTS-NUM-014",
+        "SSC-MTS-NUM-088",
+        "SSC-MTS-NUM-036",
+        "SSC-MTS-NUM-087",
+        "SSC-MTS-NUM-043",
+        "SSC-MTS-NUM-012",
+        "SSC-MTS-NUM-016",
+        "SSC-MTS-NUM-029",
+        "SSC-MTS-REA-035",
+        "SSC-MTS-REA-068",
+        "SSC-MTS-REA-037",
+        "SSC-MTS-REA-004",
+        "SSC-MTS-REA-047",
+        "SSC-MTS-REA-091",
+        "SSC-MTS-REA-029",
+        "SSC-MTS-REA-021",
+        "SSC-MTS-REA-046",
+        "SSC-MTS-REA-096",
+        "SSC-MTS-REA-062",
+        "SSC-MTS-REA-090",
+        "SSC-MTS-REA-025",
+        "SSC-MTS-REA-030",
+        "SSC-MTS-REA-032",
+        "SSC-MTS-REA-060",
+        "SSC-MTS-REA-074",
+        "SSC-MTS-REA-005",
+        "SSC-MTS-REA-013",
+        "SSC-MTS-REA-008",
+        "SSC-MTS-GA-033",
+        "SSC-MTS-GA-008",
+        "SSC-MTS-GA-013",
+        "SSC-MTS-GA-043",
+        "SSC-MTS-GA-036",
+        "SSC-MTS-GA-055",
+        "SSC-MTS-GA-002",
+        "SSC-MTS-GA-064",
+        "SSC-MTS-GA-096",
+        "SSC-MTS-GA-070",
+        "SSC-MTS-GA-086",
+        "SSC-MTS-GA-022",
+        "SSC-MTS-GA-071",
+        "SSC-MTS-GA-100",
+        "SSC-MTS-GA-084",
+        "SSC-MTS-GA-007",
+        "SSC-MTS-GA-056",
+        "SSC-MTS-GA-060",
+        "SSC-MTS-GA-029",
+        "SSC-MTS-GA-050",
+        "SSC-MTS-GA-042",
+        "SSC-MTS-GA-024",
+        "SSC-MTS-GA-077",
+        "SSC-MTS-GA-019",
+        "SSC-MTS-GA-080",
+        "SSC-MTS-ENG-011",
+        "SSC-MTS-ENG-072",
+        "SSC-MTS-ENG-065",
+        "SSC-MTS-ENG-035",
+        "SSC-MTS-ENG-081",
+        "SSC-MTS-ENG-061",
+        "SSC-MTS-ENG-030",
+        "SSC-MTS-ENG-085",
+        "SSC-MTS-ENG-042",
+        "SSC-MTS-ENG-049",
+        "SSC-MTS-ENG-070",
+        "SSC-MTS-ENG-057",
+        "SSC-MTS-ENG-043",
+        "SSC-MTS-ENG-097",
+        "SSC-MTS-ENG-096",
+        "SSC-MTS-ENG-016",
+        "SSC-MTS-ENG-076",
+        "SSC-MTS-ENG-074",
+        "SSC-MTS-ENG-045",
+        "SSC-MTS-ENG-017",
+        "SSC-MTS-ENG-060",
+        "SSC-MTS-ENG-063",
+        "SSC-MTS-ENG-087",
+        "SSC-MTS-ENG-047",
+        "SSC-MTS-ENG-090"
+      ]
+    },
     {
       "id": "mock_1795060190239_4xhvye",
       "userId": "usr_test_rot_1795060190209_10w3f",
@@ -26037,6 +26615,21 @@
       "speechVolume": 1,
       "recognitionLang": "en-IN",
       "fontFace": "system"
+    },
+    "usr_1795184639789": {
+      "userId": "usr_1795184639789",
+      "theme": "sapphire",
+      "fontScale": 125,
+      "dyslexiaFont": false,
+      "speechRate": 1,
+      "speechPitch": 1,
+      "voiceURI": "default",
+      "autoReadAloud": true,
+      "highContrastBorders": true,
+      "reduceMotion": false,
+      "compensatoryTimeEnabled": false,
+      "whisperModelSize": "base",
+      "isBlindMode": false
     }
   },
   "learningHistory": [
@@ -98973,6 +99566,816 @@
       "cycleNumber": 2,
       "assignedAt": "2026-11-19T03:49:50.152Z",
       "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_63vifj_SSC-MTS-NUM-078",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-078",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_t951id_SSC-MTS-NUM-023",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-023",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_0gvg9b_SSC-MTS-NUM-026",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-026",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_4ryd52_SSC-MTS-NUM-035",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-035",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_v5vuou_SSC-MTS-NUM-097",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-097",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_06rkac_SSC-MTS-NUM-058",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-058",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_w13cyi_SSC-MTS-NUM-086",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-086",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_xgmtuy_SSC-MTS-NUM-098",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-098",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_w6xo15_SSC-MTS-NUM-083",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-083",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_k8s5sc_SSC-MTS-NUM-024",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-024",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_igxax6_SSC-MTS-NUM-049",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-049",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_fgtkeb_SSC-MTS-NUM-019",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-019",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_ogijiy_SSC-MTS-NUM-014",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-014",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_ixbrki_SSC-MTS-NUM-088",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-088",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_hkxs92_SSC-MTS-NUM-036",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-036",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_vsnbs8_SSC-MTS-NUM-087",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-087",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_hk0dls_SSC-MTS-NUM-043",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-043",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_y9dkci_SSC-MTS-NUM-012",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-012",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_mm5fi6_SSC-MTS-NUM-016",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-016",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_ac4kda_SSC-MTS-NUM-029",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-NUM-029",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_o0ggur_SSC-MTS-REA-035",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-035",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_0jjv5k_SSC-MTS-REA-068",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-068",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_1az26s_SSC-MTS-REA-037",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-037",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_w4hjuv_SSC-MTS-REA-004",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-004",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_1x6wbb_SSC-MTS-REA-047",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-047",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_tjb1wv_SSC-MTS-REA-091",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-091",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_gsp68k_SSC-MTS-REA-029",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-029",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_lfciy5_SSC-MTS-REA-021",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-021",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_os7sga_SSC-MTS-REA-046",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-046",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_i60wxt_SSC-MTS-REA-096",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-096",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_47qm1b_SSC-MTS-REA-062",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-062",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_cr6n5o_SSC-MTS-REA-090",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-090",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_ol95l0_SSC-MTS-REA-025",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-025",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_4wclqr_SSC-MTS-REA-030",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-030",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_pq4tlo_SSC-MTS-REA-032",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-032",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_13i8go_SSC-MTS-REA-060",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-060",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_oqt355_SSC-MTS-REA-074",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-074",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_k4iuab_SSC-MTS-REA-005",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-005",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_ri3z1t_SSC-MTS-REA-013",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-013",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_c2uo18_SSC-MTS-REA-008",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-REA-008",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_4janqg_SSC-MTS-GA-033",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-033",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_1ctov5_SSC-MTS-GA-008",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-008",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_stjol9_SSC-MTS-GA-013",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-013",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_moa8nx_SSC-MTS-GA-043",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-043",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_w8pu5s_SSC-MTS-GA-036",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-036",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_7xc3zb_SSC-MTS-GA-055",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-055",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_1d1j94_SSC-MTS-GA-002",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-002",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_yrnlja_SSC-MTS-GA-064",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-064",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_cposjm_SSC-MTS-GA-096",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-096",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_8mcqd5_SSC-MTS-GA-070",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-070",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_9rob2w_SSC-MTS-GA-086",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-086",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_280gnf_SSC-MTS-GA-022",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-022",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_egmvv2_SSC-MTS-GA-071",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-071",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_fbu3fr_SSC-MTS-GA-100",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-100",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_1eh1do_SSC-MTS-GA-084",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-084",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_jxjl1b_SSC-MTS-GA-007",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-007",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_jwllok_SSC-MTS-GA-056",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-056",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_w9n4l1_SSC-MTS-GA-060",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-060",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_ul6yl1_SSC-MTS-GA-029",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-029",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_fui26e_SSC-MTS-GA-050",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-050",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_xvmxnc_SSC-MTS-GA-042",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-042",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_v2sk8s_SSC-MTS-GA-024",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-024",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_yiem12_SSC-MTS-GA-077",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-077",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_d9a4jr_SSC-MTS-GA-019",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-019",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_xtry4o_SSC-MTS-GA-080",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-GA-080",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_y7anoz_SSC-MTS-ENG-011",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-011",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_qqa453_SSC-MTS-ENG-072",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-072",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_8mhcq7_SSC-MTS-ENG-065",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-065",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_9qy6ci_SSC-MTS-ENG-035",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-035",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_c4pq6z_SSC-MTS-ENG-081",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-081",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_6etv9b_SSC-MTS-ENG-061",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-061",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_ueh7yh_SSC-MTS-ENG-030",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-030",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_u20781_SSC-MTS-ENG-085",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-085",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_l3m52l_SSC-MTS-ENG-042",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-042",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_mp8bjp_SSC-MTS-ENG-049",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-049",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_m51weo_SSC-MTS-ENG-070",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-070",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_cr5lua_SSC-MTS-ENG-057",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-057",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_q4yo4p_SSC-MTS-ENG-043",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-043",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_1zqj1m_SSC-MTS-ENG-097",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-097",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_0vmcyk_SSC-MTS-ENG-096",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-096",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_utmdqa_SSC-MTS-ENG-016",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-016",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_223egy_SSC-MTS-ENG-076",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-076",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_j11lev_SSC-MTS-ENG-074",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-074",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_xem165_SSC-MTS-ENG-045",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-045",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_a9r9ig_SSC-MTS-ENG-017",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-017",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_q8s0fk_SSC-MTS-ENG-060",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-060",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_3un9n8_SSC-MTS-ENG-063",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-063",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_0c3v0w_SSC-MTS-ENG-087",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-087",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_g50ck9_SSC-MTS-ENG-047",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-047",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
+    },
+    {
+      "id": "asgn_1795184667836_czebfy_SSC-MTS-ENG-090",
+      "userId": "usr_1795184639789",
+      "attemptId": "mock_1795184667836_hi0hld",
+      "questionId": "SSC-MTS-ENG-090",
+      "cycleNumber": 1,
+      "assignedAt": "2026-11-20T14:24:27.836Z",
+      "isSubmitted": false
     }
   ],
   "mockRotationStates": {
@@ -99318,6 +100721,13 @@
       "completedQuestionCount": 0,
       "lastAttemptSequence": 0,
       "updatedAt": "2026-11-19T03:49:50.311Z"
+    },
+    "usr_1795184639789": {
+      "userId": "usr_1795184639789",
+      "currentCycle": 1,
+      "completedQuestionCount": 0,
+      "lastAttemptSequence": 0,
+      "updatedAt": "2026-11-20T14:24:25.858Z"
     }
   }
 }

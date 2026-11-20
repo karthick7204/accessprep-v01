@@ -1418,252 +1418,267 @@ export function VoicePracticeScreen() {
         </div>
       </div>
 
-      {/* 3. Central Question Card */}
-      <div className="p-6 sm:p-8 bg-white border-2 border-[#D9E1EF] rounded-2xl shadow-sm space-y-6">
-        {/* Repeat Question Controls Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#E8EBF0]">
-          <span className="text-xs font-bold text-[#64748B] uppercase tracking-wider">
-            Audio &amp; Voice Controls
-          </span>
-
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              data-action="repeat-question"
-              onClick={() => {
-                stopSpeaking();
-                speakText(repeatQuestionTextOnly(currentQ));
-              }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#1749E8] bg-[#EEF4FF] hover:bg-blue-100 border border-blue-200 rounded-lg shadow-2xs transition-colors focus:ring-2 focus:ring-[#1749E8]"
-              aria-label="Repeat current question text only (Keyboard shortcut: R — question only, Space — full question)"
-              title="Repeat question text only (R)"
-            >
-              <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Repeat Question (R)</span>
-            </button>
-
-            <button
-              type="button"
-              data-action="repeat-options"
-              onClick={() => {
-                stopSpeaking();
-                speakText(repeatOptionsTextOnly(currentQ));
-              }}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#1749E8] bg-[#EEF4FF] hover:bg-blue-100 border border-blue-200 rounded-lg shadow-2xs transition-colors focus:ring-2 focus:ring-[#1749E8]"
-              aria-label="Repeat answer options only (Keyboard shortcut: O — options only)"
-              title="Repeat options only (O)"
-            >
-              <List className="w-3.5 h-3.5" aria-hidden="true" />
-              <span>Repeat Options (O)</span>
-            </button>
-
-            {isSpeaking && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (isPausedSpeaking) {
-                      resumeSpeaking();
-                      announce('Speech resumed', 'polite');
-                    } else {
-                      pauseSpeaking();
-                      announce('Speech paused', 'polite');
-                    }
-                  }}
-                  className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold text-[#D97706] bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-lg transition-colors"
-                  aria-label={isPausedSpeaking ? 'Resume audio reading' : 'Pause audio reading'}
-                >
-                  {isPausedSpeaking ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5" />}
-                  <span>{isPausedSpeaking ? 'Resume' : 'Pause'}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => {
-                    stopSpeaking();
-                    announce('Speech stopped', 'polite');
-                  }}
-                  className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-colors"
-                  aria-label="Stop audio reading"
-                >
-                  <Square className="w-3.5 h-3.5 fill-current" />
-                  <span>Stop</span>
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* Question Text */}
-        <div className="text-base sm:text-lg font-bold text-[#172033] leading-relaxed max-w-prose">
-          {currentQ.question_text}
-        </div>
-
-        {/* Multiple Choice Options */}
-        <div role="radiogroup" aria-label="Answer Options" className="space-y-3">
-          {options.map((opt) => {
-            const isSelected = selectedOption === opt.key;
-            let borderStyle = 'border-[#D9E1EF] hover:border-[#1749E8] bg-white';
-            if (isSelected) {
-              borderStyle = 'border-[#1749E8] bg-[#EEF4FF] ring-2 ring-[#1749E8] shadow-xs';
-            }
-            if (hasSubmitted) {
-              if (opt.key === currentQ.correct_answer) {
-                borderStyle = 'border-emerald-600 bg-emerald-50 ring-2 ring-emerald-600 text-emerald-950';
-              } else if (isSelected && !evaluation?.isCorrect) {
-                borderStyle = 'border-red-600 bg-red-50 ring-2 ring-red-600 text-red-950';
-              }
-            }
-
-            return (
-              <div
-                key={opt.key}
-                id={`voice-option-${opt.key}`}
-                data-testid={`voice-option-${opt.key}`}
-                role="radio"
-                aria-checked={isSelected}
-                tabIndex={hasSubmitted ? -1 : 0}
-                onClick={() => {
-                  if (!isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
-                    submitAnswer(opt.key);
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (
-                    !isSubmittingRef.current &&
-                    !hasAnsweredCurrentQuestionRef.current &&
-                    (e.key === 'Enter' || e.key === ' ')
-                  ) {
-                    e.preventDefault();
-                    submitAnswer(opt.key);
-                  }
-                }}
-                className={`w-full p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between gap-4 text-left ${borderStyle} ${hasSubmitted ? 'cursor-default' : ''
-                  } focus:outline-hidden focus:ring-2 focus:ring-[#1749E8]`}
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${isSelected ? 'bg-[#1749E8] text-white' : 'bg-slate-200 text-slate-800'
-                      }`}
-                  >
-                    {opt.key}
-                  </span>
-                  <span className="text-sm font-medium text-[#172033]">{opt.text}</span>
-                </div>
-
-                <div className="flex items-center gap-2 shrink-0">
-                  <button
-                    type="button"
-                    title={`Read Option ${opt.key} aloud`}
-                    aria-label={`Read Option ${opt.key} aloud: ${opt.text}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      repeatSingleOptionAloud(opt.key as any);
-                    }}
-                    className="p-1.5 text-[#64748B] hover:text-[#1749E8] hover:bg-[#EEF2FF] rounded-lg transition-colors focus:ring-2 focus:ring-[#1749E8]"
-                  >
-                    <Volume2 className="w-4 h-4" aria-hidden="true" />
-                  </button>
-
-                  {hasSubmitted && opt.key === currentQ.correct_answer && (
-                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
-                  )}
-                  {hasSubmitted && isSelected && !evaluation?.isCorrect && (
-                    <XCircle className="w-5 h-5 text-red-600 shrink-0" />
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* 4. Action Buttons */}
-        <div className="pt-4 border-t border-[#D9E1EF] flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={handlePreviousQuestion}
-              disabled={currentIndex === 0}
-              className="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg border border-slate-300 disabled:opacity-40"
-              aria-label="Previous practice question (P or Left Arrow)"
-              title="Previous question (P or Left Arrow)"
-            >
-              Previous (P)
-            </button>
-            <button
-              type="button"
-              onClick={advanceToNextQuestion}
-              disabled={currentIndex === questions.length - 1}
-              className="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg border border-slate-300 disabled:opacity-40"
-              aria-label="Next practice question (N or Enter)"
-              title="Next question (N or Enter)"
-            >
-              Next (N / Enter)
-            </button>
-            <button
-              type="button"
-              onClick={() => readCurrentQuestion(currentQ, currentIndex, questions.length)}
-              className="px-3.5 py-2 text-xs font-semibold text-[#1749E8] bg-[#EEF4FF] hover:bg-blue-100 rounded-lg border border-blue-200 inline-flex items-center gap-1.5"
-            >
-              <Volume2 className="w-3.5 h-3.5" />
-              <span>Repeat Audio (Space)</span>
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2">
-            {!hasSubmitted ? (
+      {/* 3. Central Question Card or Evaluation View */}
+      {hasSubmitted && evaluation ? (
+        <div className="space-y-4">
+          {/* Action Buttons Toolbar at Top (matches reference layout) */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
               <button
                 type="button"
-                onClick={() => selectedOption && submitAnswer(selectedOption)}
-                disabled={!selectedOption || isSubmittingRef.current}
-                className="px-6 py-2.5 text-sm font-bold text-white bg-[#1749E8] hover:bg-[#123BB8] rounded-lg shadow-sm disabled:opacity-40 transition-all active:scale-95 focus:ring-2 focus:ring-[#1749E8]"
+                onClick={handlePreviousQuestion}
+                disabled={currentIndex === 0}
+                className="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg border border-slate-300 disabled:opacity-40"
+                aria-label="Previous practice question (P or Left Arrow)"
+                title="Previous question (P or Left Arrow)"
               >
-                Submit Answer (Enter)
+                Previous (P)
               </button>
-            ) : (
               <button
                 type="button"
                 onClick={advanceToNextQuestion}
                 disabled={currentIndex === questions.length - 1}
-                className="px-6 py-2.5 text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg shadow-sm inline-flex items-center gap-2 transition-all active:scale-95 focus:ring-2 focus:ring-emerald-500"
+                className="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg border border-slate-300 disabled:opacity-40"
+                aria-label="Next practice question (N or Enter)"
+                title="Next question (N or Enter)"
               >
-                <span>Next Question</span>
-                <ArrowRight className="w-4 h-4" />
+                Next (N / Enter)
               </button>
-            )}
-          </div>
-        </div>
-
-        {/* 5. High-Visibility Answer Verification Feedback & Academic Explanation */}
-        {hasSubmitted && evaluation && (
-          <div className="space-y-3 mt-4">
-            <AccessibleExplanationCard
-              questionText={currentQ.question_text}
-              selectedOption={selectedOption}
-              selectedOptionText={selectedOption ? (currentQ as any)['option_' + selectedOption.toLowerCase()] : undefined}
-              correctOption={evaluation.correctAnswer || currentQ.correct_answer}
-              correctOptionText={(currentQ as any)['option_' + (evaluation.correctAnswer || currentQ.correct_answer).toLowerCase()]}
-              isCorrect={evaluation.isCorrect}
-              explanation={evaluation.explanation}
-              subject={currentQ.subject}
-              topic={currentQ.topic}
-              marksAwarded={evaluation.isCorrect ? 3 : 0}
-              sourceReference={`${currentQ.source_name} (${currentQ.source_reference})`}
-            />
-
-            <div className="flex flex-wrap items-center justify-end gap-2 pt-1 text-xs">
               <button
                 type="button"
-                onClick={() => navigateTo('ai_tutor')}
-                className="font-bold text-[#1749E8] dark:text-blue-400 hover:underline inline-flex items-center gap-1.5 p-2 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800"
+                onClick={() => readCurrentQuestion(currentQ, currentIndex, questions.length)}
+                className="px-3.5 py-2 text-xs font-semibold text-[#1749E8] bg-[#EEF4FF] hover:bg-blue-100 rounded-lg border border-blue-200 inline-flex items-center gap-1.5"
               >
-                <Brain className="w-4 h-4" />
-                <span>Ask AI Tutor to elaborate on this concept (Alt+T)</span>
+                <Volume2 className="w-3.5 h-3.5" />
+                <span>Repeat Audio (Space)</span>
               </button>
             </div>
+
+            <button
+              type="button"
+              onClick={advanceToNextQuestion}
+              disabled={currentIndex === questions.length - 1}
+              className="px-6 py-2.5 text-sm font-bold text-white bg-emerald-700 hover:bg-emerald-800 rounded-lg shadow-sm inline-flex items-center gap-2 transition-all active:scale-95 focus:ring-2 focus:ring-emerald-500"
+            >
+              <span>Next Question</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
           </div>
-        )}
-      </div>
+
+          {/* High-Visibility Answer Verification Feedback & Academic Explanation Card */}
+          <AccessibleExplanationCard
+            questionText={currentQ.question_text}
+            selectedOption={selectedOption}
+            selectedOptionText={selectedOption ? (currentQ as any)['option_' + selectedOption.toLowerCase()] : undefined}
+            correctOption={evaluation.correctAnswer || currentQ.correct_answer}
+            correctOptionText={(currentQ as any)['option_' + (evaluation.correctAnswer || currentQ.correct_answer).toLowerCase()]}
+            isCorrect={evaluation.isCorrect}
+            explanation={evaluation.explanation}
+            subject={currentQ.subject}
+            topic={currentQ.topic}
+            marksAwarded={evaluation.isCorrect ? 3 : 0}
+            sourceReference={`${currentQ.source_name} (${currentQ.source_reference})`}
+          />
+
+          <div className="flex flex-wrap items-center justify-end gap-2 pt-1 text-xs">
+            <button
+              type="button"
+              onClick={() => navigateTo('ai_tutor')}
+              className="font-bold text-[#1749E8] hover:bg-blue-50 inline-flex items-center gap-1.5 p-2 rounded-lg bg-white border border-blue-200 shadow-2xs"
+            >
+              <Brain className="w-4 h-4" />
+              <span>Ask AI Tutor to elaborate on this concept (Alt+T)</span>
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="p-6 sm:p-8 bg-white border-2 border-[#D9E1EF] rounded-2xl shadow-sm space-y-6">
+          {/* Repeat Question Controls Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#E8EBF0]">
+            <span className="text-xs font-bold text-[#64748B] uppercase tracking-wider">
+              Audio &amp; Voice Controls
+            </span>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                data-action="repeat-question"
+                onClick={() => {
+                  stopSpeaking();
+                  speakText(repeatQuestionTextOnly(currentQ));
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#1749E8] bg-[#EEF4FF] hover:bg-blue-100 border border-blue-200 rounded-lg shadow-2xs transition-colors focus:ring-2 focus:ring-[#1749E8]"
+                aria-label="Repeat current question text only (Keyboard shortcut: R — question only, Space — full question)"
+                title="Repeat question text only (R)"
+              >
+                <RotateCcw className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Repeat Question (R)</span>
+              </button>
+
+              <button
+                type="button"
+                data-action="repeat-options"
+                onClick={() => {
+                  stopSpeaking();
+                  speakText(repeatOptionsTextOnly(currentQ));
+                }}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#1749E8] bg-[#EEF4FF] hover:bg-blue-100 border border-blue-200 rounded-lg shadow-2xs transition-colors focus:ring-2 focus:ring-[#1749E8]"
+                aria-label="Repeat answer options only (Keyboard shortcut: O — options only)"
+                title="Repeat options only (O)"
+              >
+                <List className="w-3.5 h-3.5" aria-hidden="true" />
+                <span>Repeat Options (O)</span>
+              </button>
+
+              {isSpeaking && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (isPausedSpeaking) {
+                        resumeSpeaking();
+                        announce('Speech resumed', 'polite');
+                      } else {
+                        pauseSpeaking();
+                        announce('Speech paused', 'polite');
+                      }
+                    }}
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold text-[#D97706] bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-lg transition-colors"
+                    aria-label={isPausedSpeaking ? 'Resume audio reading' : 'Pause audio reading'}
+                  >
+                    {isPausedSpeaking ? <Play className="w-3.5 h-3.5 fill-current" /> : <Pause className="w-3.5 h-3.5" />}
+                    <span>{isPausedSpeaking ? 'Resume' : 'Pause'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      stopSpeaking();
+                      announce('Speech stopped', 'polite');
+                    }}
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-lg transition-colors"
+                    aria-label="Stop audio reading"
+                  >
+                    <Square className="w-3.5 h-3.5 fill-current" />
+                    <span>Stop</span>
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Question Text */}
+          <div className="text-base sm:text-lg font-bold text-[#172033] leading-relaxed max-w-prose">
+            {currentQ.question_text}
+          </div>
+
+          {/* Multiple Choice Options */}
+          <div role="radiogroup" aria-label="Answer Options" className="space-y-3">
+            {options.map((opt) => {
+              const isSelected = selectedOption === opt.key;
+              let borderStyle = 'border-[#D9E1EF] hover:border-[#1749E8] bg-white';
+              if (isSelected) {
+                borderStyle = 'border-[#1749E8] bg-[#EEF4FF] ring-2 ring-[#1749E8] shadow-xs';
+              }
+
+              return (
+                <div
+                  key={opt.key}
+                  id={`voice-option-${opt.key}`}
+                  data-testid={`voice-option-${opt.key}`}
+                  role="radio"
+                  aria-checked={isSelected}
+                  tabIndex={0}
+                  onClick={() => {
+                    if (!isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
+                      submitAnswer(opt.key);
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (
+                      !isSubmittingRef.current &&
+                      !hasAnsweredCurrentQuestionRef.current &&
+                      (e.key === 'Enter' || e.key === ' ')
+                    ) {
+                      e.preventDefault();
+                      submitAnswer(opt.key);
+                    }
+                  }}
+                  className={`w-full p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between gap-4 text-left ${borderStyle} focus:outline-hidden focus:ring-2 focus:ring-[#1749E8]`}
+                >
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`w-7 h-7 rounded-full flex items-center justify-center font-bold text-xs shrink-0 ${isSelected ? 'bg-[#1749E8] text-white' : 'bg-slate-200 text-slate-800'
+                        }`}
+                    >
+                      {opt.key}
+                    </span>
+                    <span className="text-sm font-medium text-[#172033]">{opt.text}</span>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      type="button"
+                      title={`Read Option ${opt.key} aloud`}
+                      aria-label={`Read Option ${opt.key} aloud: ${opt.text}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        repeatSingleOptionAloud(opt.key as any);
+                      }}
+                      className="p-1.5 text-[#64748B] hover:text-[#1749E8] hover:bg-[#EEF2FF] rounded-lg transition-colors focus:ring-2 focus:ring-[#1749E8]"
+                    >
+                      <Volume2 className="w-4 h-4" aria-hidden="true" />
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="pt-4 border-t border-[#D9E1EF] flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={handlePreviousQuestion}
+                disabled={currentIndex === 0}
+                className="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg border border-slate-300 disabled:opacity-40"
+                aria-label="Previous practice question (P or Left Arrow)"
+                title="Previous question (P or Left Arrow)"
+              >
+                Previous (P)
+              </button>
+              <button
+                type="button"
+                onClick={advanceToNextQuestion}
+                disabled={currentIndex === questions.length - 1}
+                className="px-3.5 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg border border-slate-300 disabled:opacity-40"
+                aria-label="Next practice question (N or Enter)"
+                title="Next question (N or Enter)"
+              >
+                Next (N / Enter)
+              </button>
+              <button
+                type="button"
+                onClick={() => readCurrentQuestion(currentQ, currentIndex, questions.length)}
+                className="px-3.5 py-2 text-xs font-semibold text-[#1749E8] bg-[#EEF4FF] hover:bg-blue-100 rounded-lg border border-blue-200 inline-flex items-center gap-1.5"
+              >
+                <Volume2 className="w-3.5 h-3.5" />
+                <span>Repeat Audio (Space)</span>
+              </button>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => selectedOption && submitAnswer(selectedOption)}
+              disabled={!selectedOption || isSubmittingRef.current}
+              className="px-6 py-2.5 text-sm font-bold text-white bg-[#1749E8] hover:bg-[#123BB8] rounded-lg shadow-sm disabled:opacity-40 transition-all active:scale-95 focus:ring-2 focus:ring-[#1749E8]"
+            >
+              Submit Answer (Enter)
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

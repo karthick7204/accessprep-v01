@@ -13,7 +13,7 @@
  *    in the authenticated candidate's actual attempt records.
  */
 
-import { Question } from '../../db/database.ts';
+import type { Question } from '../../db/database.ts';
 
 export type DiagnosticSectionId = 'A' | 'B' | 'C' | 'D';
 

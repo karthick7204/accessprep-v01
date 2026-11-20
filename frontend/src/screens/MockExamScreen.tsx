@@ -176,26 +176,88 @@ export function MockExamScreen() {
     }
   }, [answers, secondsRemaining, currentIdx, isExamStarted, currentAttempt]);
 
-  // Start new examination attempt via backend rotation service
+  // Start new examination attempt via backend rotation service (with resilient client fallback)
   const handleStartExam = useCallback(async () => {
     setIsStartingExam(true);
     const uid = user?.id || 'usr_candidate_01';
     try {
-      const res = await fetch('/api/mock/start', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId: uid, isPwD })
-      });
-      const data = await res.json();
+      let allocatedQuestions: Question[] = [];
+      let attempt: MockExamAttempt | null = null;
+      let completedCount = 0;
 
-      if (data.isExhausted) {
-        announce('All questions have been completed in the current cycle. Please confirm to start a new cycle.', 'assertive');
-        loadRotationStatus();
-        return;
+      try {
+        const res = await fetch('/api/mock/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: uid, isPwD })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data.isExhausted) {
+            announce('All questions have been completed in the current cycle. Please confirm to start a new cycle.', 'assertive');
+            loadRotationStatus();
+            return;
+          }
+          if (data.attempt && Array.isArray(data.questions) && data.questions.length > 0) {
+            allocatedQuestions = data.questions;
+            attempt = data.attempt;
+            completedCount = data.rotationStatus?.completedQuestionCount || 0;
+          }
+        }
+      } catch (networkErr) {
+        console.warn('Backend /api/mock/start network error, engaging resilient fallback:', networkErr);
       }
 
-      const allocatedQuestions: Question[] = data.questions || [];
-      const attempt: MockExamAttempt = data.attempt;
+      // Resilient fallback: If backend rotation was unreachable, fetch curriculum questions directly
+      if (!attempt || allocatedQuestions.length === 0) {
+        try {
+          const qRes = await fetch('/api/questions?limit=400');
+          if (qRes.ok) {
+            const qData = await qRes.json();
+            const all: Question[] = qData.questions || [];
+            if (all.length > 0) {
+              // Balance or shuffle 90 questions for the mock exam
+              allocatedQuestions = [...all].sort(() => 0.5 - Math.random()).slice(0, 90);
+            }
+          }
+        } catch (qErr) {
+          console.warn('Questions fetch error during fallback:', qErr);
+        }
+
+        if (allocatedQuestions.length === 0) {
+          throw new Error('Unable to allocate examination questions. Please check connection.');
+        }
+
+        const qCount = allocatedQuestions.length;
+        const initialAnswers: Record<string, { selectedOption: string | null; timeSpent: number; markedForReview: boolean }> = {};
+        allocatedQuestions.forEach((q) => {
+          initialAnswers[q.question_id] = { selectedOption: null, timeSpent: 0, markedForReview: false };
+        });
+
+        attempt = {
+          id: `mock_${Date.now()}`,
+          userId: uid,
+          examTitle: 'SSC MTS 2026 Official Pattern Mock Examination #1',
+          session1Score: 0,
+          session2Score: 0,
+          totalScore: 0,
+          totalMax: qCount * 3,
+          percentage: 0,
+          qualified: false,
+          totalTimeSeconds: 0,
+          answers: initialAnswers,
+          completedAt: '',
+          cycleNumber: 1,
+          attemptSequence: 1,
+          status: 'in_progress',
+          totalQuestions: qCount,
+          answeredQuestions: 0,
+          startedAt: new Date().toISOString(),
+          remainingTime: isPwD ? Math.round(qCount * 80) : qCount * 60,
+          currentQuestionIndex: 0,
+          questionIds: allocatedQuestions.map((q) => q.question_id)
+        };
+      }
 
       setCurrentAttempt(attempt);
       setQuestions(allocatedQuestions);
@@ -206,12 +268,16 @@ export function MockExamScreen() {
       const initialSecs = attempt.remainingTime || (isPwD ? Math.round(qCount * 80) : qCount * 60);
       setSecondsRemaining(initialSecs);
 
+      try {
+        sessionStorage.setItem('mockExamStarted', 'true');
+        sessionStorage.setItem('mockExamAttemptId', attempt.id);
+      } catch {}
+
       setIsExamStarted(true);
       setIsExamActive(true);
 
       const seq = attempt.attemptSequence || 1;
-      const completed = data.rotationStatus?.completedQuestionCount || 0;
-      const spokenMsg = `You are starting Mock Examination ${seq}. There are ${qCount} new questions in this examination. You have ${completed} previously completed questions in your current cycle. Good luck!`;
+      const spokenMsg = `You are starting Mock Examination ${seq}. There are ${qCount} new questions in this examination. You have ${completedCount} previously completed questions in your current cycle. Good luck!`;
 
       announce(spokenMsg, 'assertive');
       speakText(spokenMsg, () => {
@@ -219,13 +285,13 @@ export function MockExamScreen() {
           readQuestionAloud(allocatedQuestions[0], 0, allocatedQuestions.length);
         }
       });
-    } catch (e) {
+    } catch (e: any) {
       console.error('Failed to start mock exam:', e);
-      announce('Failed to initialize mock examination. Please try again.', 'assertive');
+      announce(e.message || 'Failed to initialize mock examination. Please try again.', 'assertive');
     } finally {
       setIsStartingExam(false);
     }
-  }, [user?.id, isPwD, setIsExamActive, announce, speakText, loadRotationStatus]);
+  }, [user?.id, isPwD, setIsExamActive, announce, speakText, loadRotationStatus, readQuestionAloud]);
 
   // Request inline exit confirmation (triggered by Alt+Shift+X or voice "exit exam")
   const requestExamExit = useCallback((destination?: string) => {

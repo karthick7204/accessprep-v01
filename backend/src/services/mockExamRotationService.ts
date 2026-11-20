@@ -301,7 +301,11 @@ export class MockExamRotationService {
       }));
 
       // 7. Persist attempt and reserved question assignments atomically
-      await repo.createMockAttempt(newAttempt, newAssignments);
+      try {
+        await repo.createMockAttempt(newAttempt, newAssignments);
+      } catch (dbErr: any) {
+        console.warn('[Mock Rotation Service] Warning: Failed to persist mock attempt to database:', dbErr?.message);
+      }
 
       const status = await this.getRotationStatus(userId);
 
