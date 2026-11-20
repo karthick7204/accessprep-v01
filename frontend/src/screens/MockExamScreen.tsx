@@ -176,6 +176,57 @@ export function MockExamScreen() {
     }
   }, [answers, secondsRemaining, currentIdx, isExamStarted, currentAttempt]);
 
+
+  // Read question and options aloud automatically
+  const readQuestionAloud = useCallback((q: Question, idx: number, total: number) => {
+    if (!q) return;
+    const prompt = formatFullQuestionPrompt(q, idx, total);
+    announce(`Reading Question ${idx + 1} of ${total}`, 'polite');
+    speakText(prompt, () => {
+      playBeacon('listening');
+      startVoiceListening();
+    });
+  }, [speakText, playBeacon, startVoiceListening, announce]);
+
+  const repeatQuestionAloud = useCallback((q: Question) => {
+    if (!q) return;
+    repeatCurrentQuestion(q, {
+      stopSpeaking,
+      speakText,
+      announce,
+      onPlaybackEnd: () => {
+        playBeacon('listening');
+        startVoiceListening();
+      }
+    });
+  }, [stopSpeaking, speakText, playBeacon, startVoiceListening, announce]);
+
+  const repeatOptionsAloud = useCallback((q: Question) => {
+    if (!q) return;
+    repeatCurrentOptions(q, {
+      stopSpeaking,
+      speakText,
+      announce,
+      onPlaybackEnd: () => {
+        playBeacon('listening');
+        startVoiceListening();
+      }
+    });
+  }, [stopSpeaking, speakText, playBeacon, startVoiceListening, announce]);
+
+  const repeatSingleOptionAloud = useCallback((q: Question, opt: 'A' | 'B' | 'C' | 'D') => {
+    if (!q) return;
+    repeatIndividualOption(opt, q, {
+      stopSpeaking,
+      speakText,
+      announce,
+      onPlaybackEnd: () => {
+        playBeacon('listening');
+        startVoiceListening();
+      }
+    });
+  }, [stopSpeaking, speakText, playBeacon, startVoiceListening, announce]);
+
   // Start new examination attempt via backend rotation service (with resilient client fallback)
   const handleStartExam = useCallback(async () => {
     setIsStartingExam(true);
@@ -462,55 +513,6 @@ export function MockExamScreen() {
 
   const currentQ = questions[currentIdx];
 
-  // Read question and options aloud automatically
-  const readQuestionAloud = useCallback((q: Question, idx: number, total: number) => {
-    if (!q) return;
-    const prompt = formatFullQuestionPrompt(q, idx, total);
-    announce(`Reading Question ${idx + 1} of ${total}`, 'polite');
-    speakText(prompt, () => {
-      playBeacon('listening');
-      startVoiceListening();
-    });
-  }, [speakText, playBeacon, startVoiceListening, announce]);
-
-  const repeatQuestionAloud = useCallback((q: Question) => {
-    if (!q) return;
-    repeatCurrentQuestion(q, {
-      stopSpeaking,
-      speakText,
-      announce,
-      onPlaybackEnd: () => {
-        playBeacon('listening');
-        startVoiceListening();
-      }
-    });
-  }, [stopSpeaking, speakText, playBeacon, startVoiceListening, announce]);
-
-  const repeatOptionsAloud = useCallback((q: Question) => {
-    if (!q) return;
-    repeatCurrentOptions(q, {
-      stopSpeaking,
-      speakText,
-      announce,
-      onPlaybackEnd: () => {
-        playBeacon('listening');
-        startVoiceListening();
-      }
-    });
-  }, [stopSpeaking, speakText, playBeacon, startVoiceListening, announce]);
-
-  const repeatSingleOptionAloud = useCallback((q: Question, opt: 'A' | 'B' | 'C' | 'D') => {
-    if (!q) return;
-    repeatIndividualOption(opt, q, {
-      stopSpeaking,
-      speakText,
-      announce,
-      onPlaybackEnd: () => {
-        playBeacon('listening');
-        startVoiceListening();
-      }
-    });
-  }, [stopSpeaking, speakText, playBeacon, startVoiceListening, announce]);
 
   // Read aloud on mount or question index change
   useEffect(() => {
