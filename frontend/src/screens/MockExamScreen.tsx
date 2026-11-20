@@ -28,6 +28,7 @@ import { AudioToolbar } from '../components/AudioToolbar.tsx';
 import { VoiceInputButton } from '../components/VoiceInputButton.tsx';
 import { ScreenNavigationDisclaimer } from '../components/ScreenNavigationDisclaimer.tsx';
 import { Question, MockExamAttempt } from '../db/database.ts';
+import bundledQuestionsData from '../data/ssc_mts_questions.json';
 import { RotationStatus } from '../services/mockExamRotationService.ts';
 import { parseSpokenAnswer } from '../utils/answerParser.ts';
 import {
@@ -264,15 +265,26 @@ export function MockExamScreen() {
         try {
           const qRes = await fetch('/api/questions?limit=400');
           if (qRes.ok) {
-            const qData = await qRes.json();
-            const all: Question[] = qData.questions || [];
-            if (all.length > 0) {
-              // Balance or shuffle 90 questions for the mock exam
-              allocatedQuestions = [...all].sort(() => 0.5 - Math.random()).slice(0, 90);
+            const contentType = qRes.headers.get('content-type') || '';
+            if (contentType.includes('application/json')) {
+              const qData = await qRes.json();
+              const all: Question[] = qData.questions || [];
+              if (all.length > 0) {
+                // Balance or shuffle 90 questions for the mock exam
+                allocatedQuestions = [...all].sort(() => 0.5 - Math.random()).slice(0, 90);
+              }
             }
           }
         } catch (qErr) {
           console.warn('Questions fetch error during fallback:', qErr);
+        }
+
+        // Offline / bundled fallback safeguard
+        if (allocatedQuestions.length === 0) {
+          const pool = (bundledQuestionsData as unknown as Question[]) || [];
+          if (pool.length > 0) {
+            allocatedQuestions = [...pool].sort(() => 0.5 - Math.random()).slice(0, 90);
+          }
         }
 
         if (allocatedQuestions.length === 0) {

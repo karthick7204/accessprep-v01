@@ -27,6 +27,7 @@ import { VoiceInputButton } from '../components/VoiceInputButton.tsx';
 import { ScreenNavigationDisclaimer } from '../components/ScreenNavigationDisclaimer.tsx';
 import { AccessibleExplanationCard } from '../components/common/AccessibleExplanationCard.tsx';
 import { Question } from '../db/database.ts';
+import bundledQuestionsData from '../data/ssc_mts_questions.json';
 import { parseSpokenAnswer } from '../utils/answerParser.ts';
 import { parseSubjectSelectionIntent } from '../voice/commandParser.ts';
 import {
@@ -495,42 +496,69 @@ export function VoicePracticeScreen() {
   // ---------------------------------------------------------------------------
 
   const fetchQuestions = useCallback(
-    (subjectToFetch: string) => {
+    async (subjectToFetch: string) => {
       setLoading(true);
       setSessionStep('LOADING');
       sessionStepRef.current = 'LOADING';
 
-      const params = new URLSearchParams({ limit: '400' });
-      if (subjectToFetch && subjectToFetch !== 'all') {
-        params.append('subject', subjectToFetch);
-      }
-      const topicFilter = sessionStorage.getItem('practice_filter_topic');
-      if (topicFilter && subjectToFetch !== 'all') {
-        params.append('topic', topicFilter);
-      }
+      let qList: Question[] = [];
 
-      fetch(`/api/questions?${params.toString()}`)
-        .then((r) => r.json())
-        .then((data) => {
-          const qList: Question[] = data.questions || [];
-          setQuestions(qList);
-          questionsRef.current = qList;
+      try {
+        const params = new URLSearchParams({ limit: '400' });
+        if (subjectToFetch && subjectToFetch !== 'all') {
+          params.append('subject', subjectToFetch);
+        }
+        const topicFilter = sessionStorage.getItem('practice_filter_topic');
+        if (topicFilter && subjectToFetch !== 'all') {
+          params.append('topic', topicFilter);
+        }
 
-          setCurrentIndex(0);
-          currentIndexRef.current = 0;
-          setSelectedOption(null);
-          setHasSubmitted(false);
-          setEvaluation(null);
-          isSubmittingRef.current = false;
-          hasAnsweredCurrentQuestionRef.current = false;
-          questionStartTimeRef.current = Date.now();
-
-          if (qList.length > 0) {
-            readCurrentQuestion(qList[0], 0, qList.length);
+        const res = await fetch(`/api/questions?${params.toString()}`);
+        if (res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if (Array.isArray(data.questions) && data.questions.length > 0) {
+              qList = data.questions;
+            }
           }
-        })
-        .catch((e) => console.warn('Questions fetch error:', e))
-        .finally(() => setLoading(false));
+        }
+      } catch (e) {
+        console.warn('Questions fetch network error, engaging bundled dataset:', e);
+      }
+
+      // Resilient local fallback from bundled official questions:
+      if (!qList || qList.length === 0) {
+        let pool = (bundledQuestionsData as unknown as Question[]) || [];
+        if (subjectToFetch && subjectToFetch !== 'all') {
+          const norm = subjectToFetch.toLowerCase().trim();
+          pool = pool.filter((q) => q.subject.toLowerCase().trim() === norm);
+        }
+        const topicFilter = sessionStorage.getItem('practice_filter_topic');
+        if (topicFilter && subjectToFetch !== 'all') {
+          const normTopic = topicFilter.toLowerCase().trim();
+          const topicMatches = pool.filter((q) => q.topic.toLowerCase().trim() === normTopic);
+          if (topicMatches.length > 0) pool = topicMatches;
+        }
+        qList = pool;
+      }
+
+      setQuestions(qList);
+      questionsRef.current = qList;
+
+      setCurrentIndex(0);
+      currentIndexRef.current = 0;
+      setSelectedOption(null);
+      setHasSubmitted(false);
+      setEvaluation(null);
+      isSubmittingRef.current = false;
+      hasAnsweredCurrentQuestionRef.current = false;
+      questionStartTimeRef.current = Date.now();
+      setLoading(false);
+
+      if (qList.length > 0) {
+        readCurrentQuestion(qList[0], 0, qList.length);
+      }
     },
     [readCurrentQuestion]
   );
@@ -547,9 +575,10 @@ export function VoicePracticeScreen() {
 
       const msg = `Selected ${subjectLabel}. Loading practice questions.`;
       announce(msg, 'assertive');
-      speakText(msg, () => {
-        fetchQuestions(subjectVal);
-      });
+      speakText(msg);
+
+      // Immediately fetch questions without waiting for speech synthesis callback
+      fetchQuestions(subjectVal);
     },
     [announce, speakText, fetchQuestions]
   );
@@ -1142,13 +1171,30 @@ export function VoicePracticeScreen() {
   // ---------------------------------------------------------------------------
   // Render: Loading State
   // ---------------------------------------------------------------------------
-  if (loading || !currentQ) {
+  if (loading) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-16 text-center text-slate-600" id="main-content">
         <div className="animate-pulse space-y-4">
           <div className="h-8 bg-slate-200 rounded-md w-64 mx-auto" />
           <p className="text-sm font-semibold">Loading Voice-First Practice Session...</p>
         </div>
+      </div>
+    );
+  }
+
+  if (!currentQ && sessionStep !== 'SUBJECT_SELECTION') {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-12 text-center space-y-4" id="main-content">
+        <p className="text-base font-bold text-slate-700">No practice questions available for this subject.</p>
+        <button
+          onClick={() => {
+            setSessionStep('SUBJECT_SELECTION');
+            sessionStepRef.current = 'SUBJECT_SELECTION';
+          }}
+          className="px-6 py-2.5 bg-blue-600 text-white font-bold rounded-xl shadow-md hover:bg-blue-700 transition"
+        >
+          Choose Another Subject
+        </button>
       </div>
     );
   }
