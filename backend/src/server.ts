@@ -3,6 +3,7 @@
  */
 
 import express from 'express';
+import fs from 'fs';
 import path from 'path';
 import { createExpressApp } from './app.ts';
 import { envConfig } from './config/env.config.ts';

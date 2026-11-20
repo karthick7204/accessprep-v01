@@ -134,6 +134,7 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
 
   await withTransaction(async (client) => {
     // 1. Migrate Users
+    const validUserIds = new Set<string>();
     for (const u of jsonData.users || []) {
       await client.query(
         `INSERT INTO users (id, roll_number, name, email, password_hash, role, pwd_category, need_scribe, exam_region, exam_language, created_at)
@@ -148,12 +149,14 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
            exam_language = EXCLUDED.exam_language`,
         [u.id, u.rollNumber, u.name, u.email, u.passwordHash, u.role || 'candidate', u.pwdCategory || 'None', Boolean(u.needScribe), u.examRegion || 'Northern Region (NR)', u.examLanguage || 'English', u.createdAt || new Date().toISOString()]
       );
+      validUserIds.add(u.id);
       counts.users++;
     }
 
     // 2. Migrate Accessibility Settings
     const settingsMap = jsonData.accessibilitySettings || {};
     for (const uid of Object.keys(settingsMap)) {
+      if (!validUserIds.has(uid)) continue;
       const s = settingsMap[uid];
       await client.query(
         `INSERT INTO accessibility_settings (user_id, theme, font_scale, dyslexia_font, speech_rate, speech_pitch, voice_uri, auto_read_aloud, high_contrast_borders, reduce_motion, compensatory_time_enabled, whisper_model_size)
@@ -176,6 +179,7 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
     }
 
     // 3. Migrate Questions (all 400 verified questions)
+    const validQuestionIds = new Set<string>();
     for (const q of questions) {
       await client.query(
         `INSERT INTO questions (question_id, subject, topic, subtopic, question_text, question_type, option_a, option_b, option_c, option_d, correct_answer, explanation, difficulty_label, source_name, source_reference, source_type, verification_status, language, created_at, updated_at, dataset_version)
@@ -191,11 +195,13 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
            difficulty_label = EXCLUDED.difficulty_label`,
         [q.question_id, q.subject, q.topic, q.subtopic || '', q.question_text, q.question_type || 'multiple_choice', q.option_a, q.option_b, q.option_c, q.option_d, q.correct_answer, q.explanation, q.difficulty_label, q.source_name, q.source_reference, q.source_type || 'Official Exam Paper', q.verification_status || 'Verified', q.language || 'English', q.created_at || new Date().toISOString(), q.updated_at || new Date().toISOString(), q.dataset_version || 'v1.0-mts-verified']
       );
+      validQuestionIds.add(q.question_id);
       counts.questions++;
     }
 
     // 4. Migrate Practice Attempts
     for (const a of jsonData.practiceAttempts || []) {
+      if (!validUserIds.has(a.userId) || (a.questionId && !validQuestionIds.has(a.questionId))) continue;
       await client.query(
         `INSERT INTO practice_attempts (id, user_id, question_id, selected_option, is_correct, time_spent_seconds, mode, timestamp)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
@@ -207,6 +213,7 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
 
     // 5. Migrate Mock Attempts
     for (const m of jsonData.mockAttempts || []) {
+      if (!validUserIds.has(m.userId)) continue;
       await client.query(
         `INSERT INTO mock_attempts (id, user_id, exam_title, session1_score, session2_score, total_score, total_max, percentage, qualified, total_time_seconds, answers, completed_at)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
@@ -218,6 +225,7 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
 
     // 6. Migrate Topic Mastery
     for (const tm of jsonData.topicMastery || []) {
+      if (!validUserIds.has(tm.userId)) continue;
       await client.query(
         `INSERT INTO topic_mastery (id, user_id, subject, topic, p_known, mastery_percentage, tier, attempts_count, correct_count, updated_at)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
@@ -235,6 +243,7 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
 
     // 7. Migrate Revision Items
     for (const r of jsonData.revisionItems || []) {
+      if (!validUserIds.has(r.userId) || (r.questionId && !validQuestionIds.has(r.questionId))) continue;
       await client.query(
         `INSERT INTO revision_items (id, user_id, question_id, repetitions, interval_days, easiness_factor, last_reviewed_at, next_review_due, mastery_level)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
@@ -252,6 +261,7 @@ export async function runDatabaseMigration(): Promise<MigrationReport> {
 
     // 8. Migrate Learning History
     for (const h of jsonData.learningHistory || []) {
+      if (!validUserIds.has(h.userId)) continue;
       await client.query(
         `INSERT INTO learning_history (id, user_id, type, title, summary, score, max_score, duration_seconds, timestamp)
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
