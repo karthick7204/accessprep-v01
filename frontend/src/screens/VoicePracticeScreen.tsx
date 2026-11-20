@@ -408,6 +408,11 @@ export function VoicePracticeScreen() {
         Math.round((Date.now() - questionStartTimeRef.current) / 1000)
       );
 
+      // 4. Record and evaluate answer with resilient local fallback
+      let isCorrect = optKey.trim().toUpperCase() === curQ.correct_answer.trim().toUpperCase();
+      let correctAnswer = curQ.correct_answer;
+      let explanation = curQ.explanation;
+
       try {
         const res = await fetch('/api/practice/submit', {
           method: 'POST',
@@ -421,72 +426,68 @@ export function VoicePracticeScreen() {
           })
         });
 
-        if (!res.ok) {
-          throw new Error(`Server returned HTTP ${res.status}`);
-        }
-
-        const data = await res.json();
-        const isCorrect = Boolean(data.isCorrect);
-        const correctAnswer = data.correctAnswer || curQ.correct_answer;
-        const explanation = data.explanation || curQ.explanation;
-
-        setHasSubmitted(true);
-        setEvaluation({
-          isCorrect,
-          explanation,
-          correctAnswer
-        });
-
-        setSessionScore((prev) => ({
-          correct: prev.correct + (isCorrect ? 1 : 0),
-          total: prev.total + 1
-        }));
-
-        setSessionStep('SPEAKING_FEEDBACK');
-        sessionStepRef.current = 'SPEAKING_FEEDBACK';
-
-        const correctOptKey = `option_${correctAnswer.toLowerCase()}` as keyof Question;
-        const correctOptText = (curQ as any)[correctOptKey] || '';
-
-        // Build feedback — include explanation for wrong answers so candidate learns
-        const feedback = isCorrect
-          ? `Correct! Option ${optKey}. You earned three marks. Say next question to continue.`
-          : `Incorrect. You chose Option ${optKey}. The correct answer is Option ${correctAnswer}: ${correctOptText}. ${explanation ? `Here is why: ${explanation}. ` : ''}Say next question when you are ready to continue.`;
-
-        announce(isCorrect ? 'Correct! (+3 Marks)' : `Incorrect. Correct is Option ${correctAnswer}`, 'assertive');
-        playBeacon(isCorrect ? 'success' : 'alert');
-
-        // For correct answers auto-advance after TTS; for wrong answers wait for "next question" voice command
-        if (isCorrect) {
-          speakText(feedback, () => {
-            advanceToNextQuestion();
-          });
-        } else {
-          speakText(feedback, () => {
-            // Stay in SPEAKING_FEEDBACK state — wait for user to say "next question"
-            setSessionStep('SPEAKING_FEEDBACK');
-            sessionStepRef.current = 'SPEAKING_FEEDBACK';
-            playBeacon('listening');
-            startVoiceListening();
-          });
-        }
-      } catch (err) {
-        console.error('[VoicePractice] Submit error:', err);
-        // Release guard so candidate can retry
-        isSubmittingRef.current = false;
-        hasAnsweredCurrentQuestionRef.current = false;
-        setSessionStep('LISTENING');
-        sessionStepRef.current = 'LISTENING';
-
-        announce('Submission error. Please speak your answer again.', 'assertive');
-        speakText(
-          'Submission could not be saved due to a network error. Please speak your answer again.',
-          () => {
-            playBeacon('listening');
-            startVoiceListening();
+        if (res.ok) {
+          const contentType = res.headers.get('content-type') || '';
+          if (contentType.includes('application/json')) {
+            const data = await res.json();
+            if (typeof data.isCorrect === 'boolean') isCorrect = data.isCorrect;
+            if (data.correctAnswer) correctAnswer = data.correctAnswer;
+            if (data.explanation) explanation = data.explanation;
           }
-        );
+        }
+      } catch (networkErr) {
+        console.warn('Network error during practice submit, evaluated locally:', networkErr);
       }
+
+      setHasSubmitted(true);
+      setEvaluation({
+        isCorrect,
+        explanation,
+        correctAnswer
+      });
+
+      setSessionScore((prev) => ({
+        correct: prev.correct + (isCorrect ? 1 : 0),
+        total: prev.total + 1
+      }));
+
+      setSessionStep('SPEAKING_FEEDBACK');
+      sessionStepRef.current = 'SPEAKING_FEEDBACK';
+
+      const correctOptKey = `option_${correctAnswer.toLowerCase()}` as keyof Question;
+      const correctOptText = (curQ as any)[correctOptKey] || '';
+
+      // Build feedback
+      const feedback = isCorrect
+        ? `Correct! Option ${optKey}. You earned three marks.`
+        : `Incorrect. You chose Option ${optKey}. The correct answer is Option ${correctAnswer}: ${correctOptText}.`;
+
+      announce(isCorrect ? 'Correct! (+3 Marks)' : `Incorrect. Correct is Option ${correctAnswer}`, 'assertive');
+      playBeacon(isCorrect ? 'success' : 'alert');
+
+      // Clear any pending advancement timer
+      if (advanceTimerRef.current) {
+        clearTimeout(advanceTimerRef.current);
+        advanceTimerRef.current = null;
+      }
+
+      let advanced = false;
+      const doAdvance = () => {
+        if (advanced) return;
+        advanced = true;
+        if (advanceTimerRef.current) {
+          clearTimeout(advanceTimerRef.current);
+          advanceTimerRef.current = null;
+        }
+        advanceToNextQuestion();
+      };
+
+      // Auto-advance safely after spoken feedback (3s timeout safeguard if TTS onEnd does not fire)
+      advanceTimerRef.current = setTimeout(doAdvance, 3200);
+
+      speakText(feedback, () => {
+        doAdvance();
+      });
     },
     [user?.id, stopSpeaking, announce, playBeacon, speakText, startVoiceListening, advanceToNextQuestion]
   );

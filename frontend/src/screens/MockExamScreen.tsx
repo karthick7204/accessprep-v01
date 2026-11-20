@@ -533,7 +533,7 @@ export function MockExamScreen() {
     }
   }, [isExamStarted, currentIdx, currentQ?.question_id, isBlindMode, settings.autoReadAloud, readQuestionAloud, questions.length]);
 
-  // Record an answer and auto-advance
+  // Record an answer without auto-advancing, waiting for user confirmation (click/voice "go to next")
   const handleRecordOption = useCallback((optKey: string) => {
     if (!currentQ || !currentAttemptRef.current) return;
     const newAnswers = {
@@ -559,17 +559,13 @@ export function MockExamScreen() {
     }).catch((e) => console.warn('Failed to save progress to backend:', e));
 
     playBeacon('success');
-    announce(`Selected Option ${optKey}`, 'polite');
+    announce(`Selected Option ${optKey}. Click Next or say go to next to continue.`, 'polite');
 
-    const nextIdx = currentIdxRef.current + 1;
-    if (nextIdx < questionsRef.current.length) {
-      speakText(`You selected option ${optKey}.`, () => {
-        setCurrentIdx(nextIdx);
-      });
-    } else {
-      speakText(`You selected option ${optKey}. You have reached the end of the test. Say 'Submit' to submit your exam, or 'Review' to go back.`);
-    }
-  }, [currentQ, answers, playBeacon, announce, speakText, user?.id]);
+    speakText(`You have selected option ${optKey}.`, () => {
+      playBeacon('listening');
+      startVoiceListening();
+    });
+  }, [currentQ, answers, playBeacon, announce, speakText, startVoiceListening, user?.id]);
 
   const handleClearResponse = () => {
     if (!currentQ || !currentAttemptRef.current) return;

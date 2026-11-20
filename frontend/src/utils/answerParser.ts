@@ -254,6 +254,12 @@ export function parseSpokenAnswer(transcript: string, options?: QuestionOptions)
     clean === 'skip question' ||
     clean === 'next' ||
     clean === 'next question' ||
+    clean === 'go to next' ||
+    clean === 'go to next question' ||
+    clean === 'go next' ||
+    clean === 'move to next' ||
+    clean === 'proceed' ||
+    clean === 'continue' ||
     clean === 'pass'
   ) {
     return { type: 'control', command: 'skip' };
