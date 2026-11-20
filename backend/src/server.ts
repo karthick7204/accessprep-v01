@@ -34,10 +34,10 @@ export async function startServer() {
   if (!envConfig.isProd) {
     const { createServer: createViteServer } = await import('vite');
     const frontendRoot = [
-      path.resolve(__dirname, '../../frontend'),
+      path.resolve(import.meta.dirname, '../../frontend'),
       path.resolve(process.cwd(), 'frontend'),
       process.cwd()
-    ].find((p) => fs.existsSync(path.resolve(p, 'index.html'))) || path.resolve(__dirname, '../../frontend');
+    ].find((p) => fs.existsSync(path.resolve(p, 'index.html'))) || path.resolve(import.meta.dirname, '../../frontend');
 
     const vite = await createViteServer({
       root: frontendRoot,
@@ -63,10 +63,10 @@ export async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = [
-      path.resolve(__dirname, '../../frontend/dist'),
+      path.resolve(import.meta.dirname, '../../frontend/dist'),
       path.resolve(process.cwd(), 'frontend/dist'),
       path.resolve(process.cwd(), 'dist')
-    ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../../frontend/dist');
+    ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../../frontend/dist');
 
     app.use(express.static(distPath));
     app.get('*', (_req, res) => {

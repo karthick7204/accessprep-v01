@@ -28,11 +28,11 @@ export async function getHealthStatus(_req: Request, res: Response) {
     postgresConnected: isPostgresConnected(),
     questionsCount: questions.length,
     mlModelArtifactAvailable:
-      fs.existsSync(path.resolve(__dirname, '../../data/model_artifact.pkl')) ||
+      fs.existsSync(path.resolve(import.meta.dirname, '../../data/model_artifact.pkl')) ||
       fs.existsSync('backend/data/model_artifact.pkl') ||
       fs.existsSync('src/data/model_artifact.pkl'),
     validationReportAvailable:
-      fs.existsSync(path.resolve(__dirname, '../../data/dataset_validation_report.json')) ||
+      fs.existsSync(path.resolve(import.meta.dirname, '../../data/dataset_validation_report.json')) ||
       fs.existsSync('backend/data/dataset_validation_report.json') ||
       fs.existsSync('src/data/dataset_validation_report.json'),
     timestamp: new Date().toISOString()

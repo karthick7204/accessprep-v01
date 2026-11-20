@@ -88,10 +88,10 @@ export function postCreateQuestion(req: Request, res: Response) {
   };
 
   const questionsFilePath = [
-    path.resolve(__dirname, '../../data/ssc_mts_questions.json'),
+    path.resolve(import.meta.dirname, '../../data/ssc_mts_questions.json'),
     path.resolve(process.cwd(), 'backend/data/ssc_mts_questions.json'),
     path.resolve(process.cwd(), 'src/data/ssc_mts_questions.json')
-  ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../../data/ssc_mts_questions.json');
+  ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../../data/ssc_mts_questions.json');
   let questions: any[] = [];
   try {
     if (fs.existsSync(questionsFilePath)) {

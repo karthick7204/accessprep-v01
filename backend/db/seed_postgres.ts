@@ -18,16 +18,16 @@ export interface SeedReport {
 export async function runPostgresMigrationAndSeed(): Promise<SeedReport> {
   const start = Date.now();
   const schemaPath = [
-    path.resolve(__dirname, './schema.sql'),
+    path.resolve(import.meta.dirname, './schema.sql'),
     path.resolve(process.cwd(), 'backend/db/schema.sql'),
     path.resolve(process.cwd(), 'src/db/schema.sql')
-  ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, './schema.sql');
+  ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, './schema.sql');
 
   const questionsPath = [
-    path.resolve(__dirname, '../data/ssc_mts_questions.json'),
+    path.resolve(import.meta.dirname, '../data/ssc_mts_questions.json'),
     path.resolve(process.cwd(), 'backend/data/ssc_mts_questions.json'),
     path.resolve(process.cwd(), 'src/data/ssc_mts_questions.json')
-  ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../data/ssc_mts_questions.json');
+  ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../data/ssc_mts_questions.json');
 
   if (!fs.existsSync(schemaPath)) {
     throw new Error(`Schema file not found at ${schemaPath}`);

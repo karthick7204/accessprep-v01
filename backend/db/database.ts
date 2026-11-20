@@ -255,16 +255,16 @@ export interface TranscriptPrivacySettings {
 }
 
 const DB_FILE = [
-  path.resolve(__dirname, '../data/app_database.json'),
+  path.resolve(import.meta.dirname, '../data/app_database.json'),
   path.resolve(process.cwd(), 'backend/data/app_database.json'),
   path.resolve(process.cwd(), 'src/data/app_database.json')
-].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../data/app_database.json');
+].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../data/app_database.json');
 
 const QUESTIONS_FILE = [
-  path.resolve(__dirname, '../data/ssc_mts_questions.json'),
+  path.resolve(import.meta.dirname, '../data/ssc_mts_questions.json'),
   path.resolve(process.cwd(), 'backend/data/ssc_mts_questions.json'),
   path.resolve(process.cwd(), 'src/data/ssc_mts_questions.json')
-].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../data/ssc_mts_questions.json');
+].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../data/ssc_mts_questions.json');
 
 export interface DatabaseStore {
   users: User[];

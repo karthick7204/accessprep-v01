@@ -35,16 +35,16 @@ function safeExecFile(
 export function getDatasetSummary(_req: Request, res: Response) {
   try {
     const reportPath = [
-      path.resolve(__dirname, '../../data/dataset_validation_report.json'),
+      path.resolve(import.meta.dirname, '../../data/dataset_validation_report.json'),
       path.resolve(process.cwd(), 'backend/data/dataset_validation_report.json'),
       path.resolve(process.cwd(), 'src/data/dataset_validation_report.json')
-    ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../../data/dataset_validation_report.json');
+    ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../../data/dataset_validation_report.json');
 
     const dictPath = [
-      path.resolve(__dirname, '../../data/data_dictionary.json'),
+      path.resolve(import.meta.dirname, '../../data/data_dictionary.json'),
       path.resolve(process.cwd(), 'backend/data/data_dictionary.json'),
       path.resolve(process.cwd(), 'src/data/data_dictionary.json')
-    ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../../data/data_dictionary.json');
+    ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../../data/data_dictionary.json');
 
     const report = fs.existsSync(reportPath)
       ? JSON.parse(fs.readFileSync(reportPath, 'utf-8'))
@@ -67,10 +67,10 @@ export function getDatasetSummary(_req: Request, res: Response) {
 export function getModelEvaluation(_req: Request, res: Response) {
   try {
     const evalPath = [
-      path.resolve(__dirname, '../../data/model_evaluation_report.json'),
+      path.resolve(import.meta.dirname, '../../data/model_evaluation_report.json'),
       path.resolve(process.cwd(), 'backend/data/model_evaluation_report.json'),
       path.resolve(process.cwd(), 'src/data/model_evaluation_report.json')
-    ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../../data/model_evaluation_report.json');
+    ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../../data/model_evaluation_report.json');
     if (!fs.existsSync(evalPath)) {
       return res.status(404).json({ error: 'Evaluation report not generated yet.' });
     }
@@ -115,10 +115,10 @@ export function postModelTrain(_req: Request, res: Response) {
         return res.status(500).json({ error: 'Model training pipeline failed', details: stderr || error.message });
       }
       const evalPath = [
-        path.resolve(__dirname, '../../data/model_evaluation_report.json'),
+        path.resolve(import.meta.dirname, '../../data/model_evaluation_report.json'),
         path.resolve(process.cwd(), 'backend/data/model_evaluation_report.json'),
         path.resolve(process.cwd(), 'src/data/model_evaluation_report.json')
-      ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../../data/model_evaluation_report.json');
+      ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../../data/model_evaluation_report.json');
       const report = fs.existsSync(evalPath)
         ? JSON.parse(fs.readFileSync(evalPath, 'utf-8'))
         : null;
@@ -156,10 +156,10 @@ export function postAudioTranscribe(req: Request, res: Response) {
 
   const filePath = file.path;
   const scriptPath = [
-    path.resolve(__dirname, '../../scripts/transcribe_audio.py'),
+    path.resolve(import.meta.dirname, '../../scripts/transcribe_audio.py'),
     path.resolve(process.cwd(), 'backend/scripts/transcribe_audio.py'),
     path.resolve(process.cwd(), 'scripts/transcribe_audio.py')
-  ].find((p) => fs.existsSync(p)) || path.resolve(__dirname, '../../scripts/transcribe_audio.py');
+  ].find((p) => fs.existsSync(p)) || path.resolve(import.meta.dirname, '../../scripts/transcribe_audio.py');
 
   function cleanupTempFile() {
     if (fs.existsSync(filePath)) {
