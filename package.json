@@ -1,16 +1,24 @@
 {
-  "name": "react-example",
+  "name": "accessprep-x",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "vite build",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "npm run dev --workspace=backend",
+    "build": "npm run build --workspace=frontend",
     "start": "tsx server.ts",
-    "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit",
-    "test": "tsx --test src/tests/*.test.ts"
+    "preview": "npm run preview --workspace=frontend",
+    "clean": "rm -rf dist frontend/dist server.js",
+    "lint": "npm run lint --workspace=frontend && npm run lint --workspace=backend",
+    "test": "npm run test --workspace=backend && npm run test --workspace=frontend",
+    "test:backend": "npm run test --workspace=backend",
+    "test:frontend": "npm run test --workspace=frontend"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

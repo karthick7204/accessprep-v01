@@ -1,0 +1,170 @@
+{
+  "report_version": "v1.0",
+  "generated_at": "2026-10-24T15:34:10Z",
+  "dataset_summary": {
+    "total_validated_records": 400,
+    "train_examples": 320,
+    "test_examples": 80,
+    "class_distribution": {
+      "Numerical and Mathematical Ability": 100,
+      "Reasoning Ability and Problem Solving": 100,
+      "General Awareness": 100,
+      "English Language and Comprehension": 100
+    },
+    "random_seed": 42,
+    "split_strategy": "80/20 Stratified Random Split"
+  },
+  "preprocessing_configuration": {
+    "unicode_normalization": "NFKD",
+    "whitespace_normalization": true,
+    "case_conversion": "lowercase",
+    "mathematical_operator_preservation": true,
+    "punctuation_policy": "Preserved for syntax, arithmetic and logic distinctions",
+    "vectorization": "TF-IDF (ngram_range: (1, 2), sublinear_tf: True, max_df: 0.90, min_df: 2)"
+  },
+  "primary_model": {
+    "model_name": "TF-IDF Vectorizer + Logistic Regression Classifier",
+    "architecture": "scikit-learn Pipeline (TfidfVectorizer -> LogisticRegression)",
+    "hyperparameters": {
+      "C": 2.0,
+      "penalty": "l2",
+      "class_weight": "balanced",
+      "solver": "lbfgs",
+      "max_iter": 1000
+    },
+    "training_time_seconds": 0.0334,
+    "cross_validation_5fold": {
+      "macro_f1_mean": 0.8989,
+      "macro_f1_std": 0.0237
+    },
+    "test_metrics": {
+      "accuracy": 0.9375,
+      "macro_precision": 0.9447,
+      "macro_recall": 0.9375,
+      "macro_f1": 0.9349,
+      "weighted_f1": 0.9349
+    },
+    "classes": [
+      "English Language and Comprehension",
+      "General Awareness",
+      "Numerical and Mathematical Ability",
+      "Reasoning Ability and Problem Solving"
+    ],
+    "confusion_matrix": [
+      [
+        20,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        20,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        20,
+        0
+      ],
+      [
+        0,
+        2,
+        3,
+        15
+      ]
+    ],
+    "per_class_results": {
+      "English Language and Comprehension": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "support": 20
+      },
+      "General Awareness": {
+        "precision": 0.9091,
+        "recall": 1.0,
+        "f1_score": 0.9524,
+        "support": 20
+      },
+      "Numerical and Mathematical Ability": {
+        "precision": 0.8696,
+        "recall": 1.0,
+        "f1_score": 0.9302,
+        "support": 20
+      },
+      "Reasoning Ability and Problem Solving": {
+        "precision": 1.0,
+        "recall": 0.75,
+        "f1_score": 0.8571,
+        "support": 20
+      }
+    }
+  },
+  "alternative_model_comparison": {
+    "model_name": "Linear Support Vector Classifier (LinearSVC)",
+    "hyperparameters": {
+      "C": 1.0,
+      "loss": "squared_hinge",
+      "max_iter": 2000
+    },
+    "test_metrics": {
+      "accuracy": 0.9375,
+      "macro_f1": 0.9349
+    },
+    "selection_rationale": "Logistic Regression chosen as the primary model due to calibrated class probability outputs (predict_proba), high interpretability of feature odds ratios, and equivalent generalization performance without risk of uncalibrated margin inflation."
+  },
+  "error_analysis": {
+    "total_misclassified_test": 5,
+    "misclassified_examples": [
+      {
+        "question_id": "SSC-MTS-REA-059",
+        "question_text": "If 'M % N' means M is the sister of N; 'M & N' means M is the father of N, then which expression means P is the paternal aunt of Q?",
+        "actual_subject": "Reasoning Ability and Problem Solving",
+        "predicted_subject": "General Awareness",
+        "topic": "Blood Relations",
+        "rationale": "Lexical or vocabulary features shared across domain boundaries (e.g. word analogies sharing vocabulary with English language tests)."
+      },
+      {
+        "question_id": "SSC-MTS-REA-008",
+        "question_text": "India : New Delhi :: Australia : ?",
+        "actual_subject": "Reasoning Ability and Problem Solving",
+        "predicted_subject": "General Awareness",
+        "topic": "Analogies",
+        "rationale": "Lexical or vocabulary features shared across domain boundaries (e.g. word analogies sharing vocabulary with English language tests)."
+      },
+      {
+        "question_id": "SSC-MTS-REA-086",
+        "question_text": "A piece of paper is folded and punched as shown. How will it appear when unfolded?",
+        "actual_subject": "Reasoning Ability and Problem Solving",
+        "predicted_subject": "Numerical and Mathematical Ability",
+        "topic": "Non-Verbal Reasoning",
+        "rationale": "Lexical or vocabulary features shared across domain boundaries (e.g. word analogies sharing vocabulary with English language tests)."
+      },
+      {
+        "question_id": "SSC-MTS-REA-028",
+        "question_text": "What is the next number: 120, 99, 80, 63, 48, ?",
+        "actual_subject": "Reasoning Ability and Problem Solving",
+        "predicted_subject": "Numerical and Mathematical Ability",
+        "topic": "Series Completion",
+        "rationale": "Lexical or vocabulary features shared across domain boundaries (e.g. word analogies sharing vocabulary with English language tests)."
+      },
+      {
+        "question_id": "SSC-MTS-REA-022",
+        "question_text": "What comes next in the sequence: 2, 6, 12, 20, 30, ?",
+        "actual_subject": "Reasoning Ability and Problem Solving",
+        "predicted_subject": "Numerical and Mathematical Ability",
+        "topic": "Series Completion",
+        "rationale": "Lexical or vocabulary features shared across domain boundaries (e.g. word analogies sharing vocabulary with English language tests)."
+      }
+    ],
+    "mitigation_recommendations": [
+      "Increase domain-specific subtopic feature engineering for verbal analogies that bridge reasoning and vocabulary.",
+      "Incorporate character n-grams to capture numerical pattern syntax in mathematical questions.",
+      "Enlarge training bank through continuous verified SSC MTS question curation."
+    ]
+  },
+  "overall_execution_time_seconds": 0.28
+}

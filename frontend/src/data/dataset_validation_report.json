@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-10-24T06:30:27.319546Z",
+  "dataset_version": "v1.0-mts-verified",
+  "total_records_evaluated": 400,
+  "total_accepted": 400,
+  "total_rejected": 0,
+  "duplicates_found": 0,
+  "incomplete_records": 0,
+  "verified_records": 400,
+  "subject_distribution": {
+    "Numerical and Mathematical Ability": 100,
+    "Reasoning Ability and Problem Solving": 100,
+    "General Awareness": 100,
+    "English Language and Comprehension": 100
+  },
+  "difficulty_distribution": {
+    "Easy": 257,
+    "Medium": 130,
+    "Hard": 13
+  },
+  "answer_distribution": {
+    "A": 100,
+    "B": 100,
+    "C": 100,
+    "D": 100
+  },
+  "validation_checks_passed": true,
+  "errors": []
+}

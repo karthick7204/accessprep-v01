@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "description": "Mathematical speech test dataset for ACCESSPREP-X. 'spoken' strings are TEXT TRANSCRIPTS (what a speech-to-text engine would return). No audio is included, so these cases measure the math parsing layer only; they do NOT measure Whisper transcription accuracy.",
+    "styles": ["standard", "indian_english", "terse", "verbose", "hyphenated_numbers"]
+  },
+  "speech_to_expression": [
+    {"id":"A01","category":"arithmetic","style":"standard","spoken":"seven plus five","expected":"7 + 5"},
+    {"id":"A02","category":"arithmetic","style":"standard","spoken":"twelve minus four","expected":"12 - 4"},
+    {"id":"A03","category":"arithmetic","style":"standard","spoken":"six times seven","expected":"6 * 7"},
+    {"id":"A04","category":"arithmetic","style":"standard","spoken":"forty-five divided by nine","expected":"45/9"},
+    {"id":"A05","category":"arithmetic","style":"hyphenated_numbers","spoken":"ninety-nine minus twenty-one","expected":"99 - 21"},
+    {"id":"A06","category":"arithmetic","style":"standard","spoken":"two plus three multiplied by four","expected":"2 + 3 * 4"},
+    {"id":"A07","category":"arithmetic","style":"indian_english","spoken":"twelve into three","expected":"12 * 3"},
+    {"id":"A08","category":"arithmetic","style":"indian_english","spoken":"three by four","expected":"3/4"},
+    {"id":"A09","category":"arithmetic","style":"indian_english","spoken":"one lakh plus fifty thousand","expected":"100000 + 50000"},
+    {"id":"A10","category":"arithmetic","style":"verbose","spoken":"one hundred and twenty five minus ten","expected":"125 - 10"},
+    {"id":"D01","category":"decimals","style":"standard","spoken":"three point five plus two point five","expected":"3.5 + 2.5"},
+    {"id":"D02","category":"decimals","style":"indian_english","spoken":"zero point zero two four","expected":"0.024"},
+    {"id":"D03","category":"decimals","style":"standard","spoken":"zero point five","expected":"0.5"},
+    {"id":"F01","category":"fractions","style":"standard","spoken":"three divided by four","expected":"3/4"},
+    {"id":"F02","category":"fractions","style":"standard","spoken":"seven over nine","expected":"7/9"},
+    {"id":"F03","category":"fractions","style":"standard","spoken":"one half","expected":"1/2"},
+    {"id":"F04","category":"fractions","style":"standard","spoken":"three quarters","expected":"3/4"},
+    {"id":"F05","category":"fractions","style":"verbose","spoken":"open bracket a plus b close bracket divided by c","expected":"(a + b) / c"},
+    {"id":"F06","category":"fractions","style":"standard","spoken":"a plus b all divided by c","expected":"(a + b) / c"},
+    {"id":"R01","category":"roots","style":"standard","spoken":"square root of forty-nine","expected":"sqrt(49)"},
+    {"id":"R02","category":"roots","style":"standard","spoken":"cube root of twenty-seven","expected":"cbrt(27)"},
+    {"id":"R03","category":"roots","style":"indian_english","spoken":"under root sixty four","expected":"sqrt(64)"},
+    {"id":"R04","category":"roots","style":"verbose","spoken":"square root of open bracket nine plus seven close bracket","expected":"sqrt(9 + 7)"},
+    {"id":"E01","category":"exponents","style":"standard","spoken":"x squared plus five equals fourteen","expected":"x^2 + 5 = 14"},
+    {"id":"E02","category":"exponents","style":"standard","spoken":"y cubed","expected":"y^3"},
+    {"id":"E03","category":"exponents","style":"standard","spoken":"two to the power of five","expected":"2^5"},
+    {"id":"E04","category":"exponents","style":"standard","spoken":"x raised to the power of four","expected":"x^4"},
+    {"id":"P01","category":"percentages","style":"standard","spoken":"twenty-five percent of two hundred","expected":"25% of 200"},
+    {"id":"P02","category":"percentages","style":"standard","spoken":"fifteen percent","expected":"15%"},
+    {"id":"P03","category":"percentages","style":"indian_english","spoken":"ten percent of five hundred","expected":"10% of 500"},
+    {"id":"B01","category":"nested_brackets","style":"standard","spoken":"open bracket x plus two close bracket multiplied by three","expected":"(x + 2) * 3"},
+    {"id":"B02","category":"nested_brackets","style":"verbose","spoken":"open bracket open bracket two plus three close bracket times four close bracket minus five","expected":"((2 + 3) * 4) - 5"},
+    {"id":"Q01","category":"equations","style":"standard","spoken":"two x plus five equals fifteen","expected":"2x + 5 = 15"},
+    {"id":"Q02","category":"equations","style":"standard","spoken":"three x minus seven equals eleven","expected":"3x - 7 = 11"},
+    {"id":"Q03","category":"equations","style":"terse","spoken":"x equals thirteen","expected":"x = 13"},
+    {"id":"Q04","category":"equations","style":"standard","spoken":"two times x","expected":"2*x"},
+    {"id":"I01","category":"inequalities","style":"standard","spoken":"x is greater than five","expected":"x > 5"},
+    {"id":"I02","category":"inequalities","style":"standard","spoken":"x is less than or equal to ten","expected":"x <= 10"},
+    {"id":"I03","category":"inequalities","style":"standard","spoken":"x is greater than or equal to three","expected":"x >= 3"},
+    {"id":"I04","category":"inequalities","style":"standard","spoken":"x is not equal to four","expected":"x != 4"},
+    {"id":"W01","category":"word_problem_expr","style":"standard","spoken":"principal times rate times time divided by one hundred","expected":null,"note":"unsupported word variables; must be rejected or flagged, not silently mis-parsed"},
+    {"id":"W02","category":"word_problem_expr","style":"standard","spoken":"two hundred minus eighty five percent of two hundred","expected":"200 - 85% of 200"},
+    {"id":"S01","category":"advanced","style":"standard","spoken":"five factorial","expected":"5!"}
+  ],
+  "ambiguous": [
+    {"id":"AM01","spoken":"square root of nine plus seven","alternatives":["sqrt(9) + 7","sqrt(9 + 7)"]},
+    {"id":"AM02","spoken":"square root of one hundred plus twenty","alternatives":["sqrt(100) + 20","sqrt(100 + 20)"]},
+    {"id":"AM03","spoken":"square root of sixteen minus four","alternatives":["sqrt(16) - 4","sqrt(16 - 4)"]}
+  ],
+  "invalid": [
+    {"id":"X01","spoken":"five divided by zero","reason":"division_by_zero"},
+    {"id":"X02","spoken":"plus plus times","reason":"invalid_syntax"},
+    {"id":"X03","spoken":"open bracket two plus three","reason":"unbalanced"},
+    {"id":"X04","spoken":"square root of negative four","reason":"negative_root"}
+  ],
+  "equivalence": [
+    {"id":"V01","student":"1/2","target":"0.5","equivalent":true},
+    {"id":"V02","student":"2(x + 3)","target":"2x + 6","equivalent":true},
+    {"id":"V03","student":"7/9","target":"0.7778","equivalent":false,"note":"rounded decimal differs by ~2.2e-5, outside the 1e-6 tolerance (corrected: original case used 0.777777777, which is only ~2e-10 away and correctly accepted)"},
+    {"id":"V04","student":"x + 2 = 5","target":"x = 3","equivalent":true},
+    {"id":"V05","student":"3/4","target":"0.75","equivalent":true},
+    {"id":"V06","student":"(x + 1)^2","target":"x^2 + 1","equivalent":false},
+    {"id":"V07","student":"2 : 3","target":"4 : 6","equivalent":true},
+    {"id":"V08","student":"25% of 200","target":"50","equivalent":true},
+    {"id":"V09","student":"x^2 - y^2","target":"(x - y)(x + y)","equivalent":true},
+    {"id":"V10","student":"12","target":"21","equivalent":false},
+    {"id":"V11","student":"x + 2","target":"x - 2","equivalent":false},
+    {"id":"V12","student":"sqrt(49)","target":"7","equivalent":true},
+    {"id":"V13","student":"x^2 = 9","target":"x^2 = 9","equivalent":true},
+    {"id":"V14","student":"2x + 5 = 15","target":"x = 5","equivalent":true}
+  ],
+  "read_aloud": [
+    {"id":"T01","input":"\\frac{3}{4}","spoken":"Three divided by four."},
+    {"id":"T02","input":"\\sqrt{49}","spoken":"Square root of forty-nine."},
+    {"id":"T03","input":"x^2 + 5 = 14","spoken":"x squared plus five equals fourteen."},
+    {"id":"T04","input":"\\frac{a+b}{c}","spoken":"a plus b, all divided by c."},
+    {"id":"T05","input":"2x + 5 = 15","spoken":"Two times x plus five equals fifteen."},
+    {"id":"T06","input":"(a + b) / c","spoken":"a plus b, all divided by c."},
+    {"id":"T07","input":"a / (b + c)","spoken":"a divided by open bracket b plus c close bracket."},
+    {"id":"T08","input":"(x + 2) * 3","spoken":"Open bracket x plus two close bracket multiplied by three."}
+  ],
+  "read_aloud_unreliable": [
+    {"id":"U01","input":"\\frac{3}{"},
+    {"id":"U02","input":"(2 + "},
+    {"id":"U03","input":"\\sqrt{"}
+  ],
+  "question_text_read_aloud": [
+    {"id":"Z01","text":"Find the unit digit in the product (2467)^153 * (341)^72.","must_contain":["to the power of 153","to the power of 72"],"must_not_contain":["^","*"]},
+    {"id":"Z02","text":"If x = 16 and y = 4, find the value of (x^2 - y^2) / (x - y).","must_contain":["squared"],"must_not_contain":["^"]},
+    {"id":"Z03","text":"Find the fourth proportional to 4, 9, 12.","must_contain":["fourth proportional"],"must_not_contain":[]},
+    {"id":"Z04","text":"Find the square root of 0.000576.","must_contain":["square root"],"must_not_contain":[]}
+  ],
+  "option_matching": [
+    {"id":"O01","spoken":"fifty five","options":{"A":"55","B":"41","C":"31","D":"53"},"expected":"A"},
+    {"id":"O02","spoken":"seven divided by nine","options":{"A":"7/10","B":"7/9","C":"3/4","D":"7/11"},"expected":"B"},
+    {"id":"O03","spoken":"zero point zero two four","options":{"A":"0.00024","B":"0.24","C":"0.0024","D":"0.024"},"expected":"D"},
+    {"id":"O04","spoken":"two hundred fifty two","options":{"A":"Rs. 252","B":"Rs. 240","C":"Rs. 260","D":"Rs. 250"},"expected":"A"},
+    {"id":"O05","spoken":"sixteen point six six seven percent","options":{"A":"20%","B":"25%","C":"15%","D":"16.67%"},"expected":null,"note":"16.667 is not within 1e-6 of 16.67; must not guess"},
+    {"id":"O06","spoken":"twenty percent","options":{"A":"20%","B":"25%","C":"15%","D":"16.67%"},"expected":"A"},
+    {"id":"O07","spoken":"three is to two","options":{"A":"3 : 2","B":"1 : 2","C":"2 : 3","D":"4 : 5"},"expected":"A"}
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "dataset_name": "ACCESSPREP-X Curated SSC MTS Question Bank",
+  "dataset_version": "v1.0-mts-verified",
+  "total_records": 400,
+  "language": "English",
+  "fields": {
+    "question_id": {
+      "type": "string",
+      "format": "SSC-MTS-[SUB]-[NNN]",
+      "nullable": false,
+      "description": "Unique identifier for each curated question record"
+    },
+    "subject": {
+      "type": "string",
+      "allowed_values": [
+        "Numerical and Mathematical Ability",
+        "Reasoning Ability and Problem Solving",
+        "General Awareness",
+        "English Language and Comprehension"
+      ],
+      "nullable": false,
+      "description": "Target exam section aligned with official SSC MTS syllabus"
+    },
+    "topic": {
+      "type": "string",
+      "nullable": false,
+      "description": "Primary pedagogical category within the subject"
+    },
+    "subtopic": {
+      "type": "string",
+      "nullable": false,
+      "description": "Specific granular skill or conceptual subtopic"
+    },
+    "question_text": {
+      "type": "string",
+      "nullable": false,
+      "description": "Full text of the question, preserving mathematical operators and punctuation"
+    },
+    "question_type": {
+      "type": "string",
+      "allowed_values": [
+        "multiple_choice"
+      ],
+      "nullable": false,
+      "description": "Standardized multiple-choice assessment item"
+    },
+    "option_a": {
+      "type": "string",
+      "nullable": false,
+      "description": "Answer choice A"
+    },
+    "option_b": {
+      "type": "string",
+      "nullable": false,
+      "description": "Answer choice B"
+    },
+    "option_c": {
+      "type": "string",
+      "nullable": false,
+      "description": "Answer choice C"
+    },
+    "option_d": {
+      "type": "string",
+      "nullable": false,
+      "description": "Answer choice D"
+    },
+    "correct_answer": {
+      "type": "string",
+      "allowed_values": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ],
+      "nullable": false,
+      "description": "Key identifier corresponding to the verified correct option"
+    },
+    "explanation": {
+      "type": "string",
+      "nullable": false,
+      "description": "Comprehensive step-by-step academic derivation or grammar rule"
+    },
+    "difficulty_label": {
+      "type": "string",
+      "allowed_values": [
+        "Easy",
+        "Medium",
+        "Hard"
+      ],
+      "nullable": false,
+      "description": "Calibrated cognitive difficulty label"
+    },
+    "source_name": {
+      "type": "string",
+      "nullable": false,
+      "description": "Originating institutional question bank"
+    },
+    "source_reference": {
+      "type": "string",
+      "nullable": false,
+      "description": "Specific year, shift, or syllabus citation"
+    },
+    "source_type": {
+      "type": "string",
+      "allowed_values": [
+        "Official Exam Paper",
+        "Original Authored (Verified)"
+      ],
+      "nullable": false,
+      "description": "Provenance classification"
+    },
+    "verification_status": {
+      "type": "string",
+      "allowed_values": [
+        "Verified"
+      ],
+      "nullable": false,
+      "description": "Academic verification check state"
+    },
+    "language": {
+      "type": "string",
+      "allowed_values": [
+        "English"
+      ],
+      "nullable": false,
+      "description": "Medium of instruction"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "ISO-8601",
+      "nullable": false
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "ISO-8601",
+      "nullable": false
+    },
+    "dataset_version": {
+      "type": "string",
+      "nullable": false
+    }
+  }
+}
