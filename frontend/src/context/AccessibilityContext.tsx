@@ -1280,6 +1280,9 @@ export function AccessibilityProvider({ children }: { children: ReactNode }) {
         isOpen={showModeSelectorModal}
         onClose={() => setShowModeSelectorModal(false)}
         onSelectMode={selectInteractionMode}
+        speakText={speakText}
+        stopSpeaking={stopSpeaking}
+        announce={announce}
       />
       {children}
     </AccessibilityContext.Provider>

@@ -23,20 +23,36 @@ import {
   RotateCcw,
   Headphones
 } from 'lucide-react';
-import { useAccessibility, AccessibilityInteractionMode } from '../../context/AccessibilityContext.tsx';
+import type { AccessibilityInteractionMode } from '../../context/AccessibilityContext.tsx';
 
 interface AccessibilityModeSelectorModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectMode: (mode: AccessibilityInteractionMode, remember: boolean) => void;
+  speakText?: (text: string, onEnd?: () => void) => void;
+  stopSpeaking?: () => void;
+  announce?: (message: string, priority?: 'polite' | 'assertive') => void;
 }
 
 export function AccessibilityModeSelectorModal({
   isOpen,
   onClose,
-  onSelectMode
+  onSelectMode,
+  speakText: propSpeakText,
+  stopSpeaking: propStopSpeaking,
+  announce: propAnnounce
 }: AccessibilityModeSelectorModalProps) {
-  const { speakText, stopSpeaking, announce } = useAccessibility();
+  const speakText = useCallback((text: string, onEnd?: () => void) => {
+    if (propSpeakText) propSpeakText(text, onEnd);
+  }, [propSpeakText]);
+
+  const stopSpeaking = useCallback(() => {
+    if (propStopSpeaking) propStopSpeaking();
+  }, [propStopSpeaking]);
+
+  const announce = useCallback((message: string, priority: 'polite' | 'assertive' = 'polite') => {
+    if (propAnnounce) propAnnounce(message, priority);
+  }, [propAnnounce]);
 
   const [selectedPendingMode, setSelectedPendingMode] = useState<AccessibilityInteractionMode | null>(null);
   const [rememberPreference, setRememberPreference] = useState(true);
