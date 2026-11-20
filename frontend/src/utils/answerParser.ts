@@ -296,6 +296,11 @@ export function parseSpokenAnswer(transcript: string, options?: QuestionOptions)
 
   if (
     clean === 'submit' ||
+    clean === 'submit answer' ||
+    clean === 'submit my answer' ||
+    clean === 'submit question' ||
+    clean === 'confirm' ||
+    clean === 'confirm answer' ||
     clean === 'submit exam' ||
     clean === 'submit the exam' ||
     clean === 'submit examination' ||

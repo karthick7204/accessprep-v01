@@ -111,6 +111,8 @@ export function VoicePracticeScreen() {
 
   const isSubmittingRef = useRef<boolean>(false);
   const hasAnsweredCurrentQuestionRef = useRef<boolean>(false);
+  const selectedOptionRef = useRef<string | null>(null);
+  selectedOptionRef.current = selectedOption;
   const questionStartTimeRef = useRef<number>(Date.now());
   const advanceTimerRef = useRef<NodeJS.Timeout | null>(null);
   const hasInitializedRef = useRef<boolean>(false);
@@ -329,6 +331,7 @@ export function VoicePracticeScreen() {
 
     // Reset per-question guards and state
     setSelectedOption(null);
+    selectedOptionRef.current = null;
     setHasSubmitted(false);
     setEvaluation(null);
     isSubmittingRef.current = false;
@@ -357,6 +360,7 @@ export function VoicePracticeScreen() {
     setCurrentIndex(prevIdx);
 
     setSelectedOption(null);
+    selectedOptionRef.current = null;
     setHasSubmitted(false);
     setEvaluation(null);
     isSubmittingRef.current = false;
@@ -370,8 +374,25 @@ export function VoicePracticeScreen() {
   }, [readCurrentQuestion]);
 
   // ---------------------------------------------------------------------------
-  // Answer Submission Engine (Atomic Guarded Flow)
+  // Answer Selection & Submission Engine (Atomic Guarded Flow)
   // ---------------------------------------------------------------------------
+
+  /**
+   * Selects an option without submitting, waiting for candidate to confirm via click or speech.
+   */
+  const handleSelectOption = useCallback(
+    (optKey: string) => {
+      if (hasSubmitted || isSubmittingRef.current || hasAnsweredCurrentQuestionRef.current) return;
+      setSelectedOption(optKey);
+      selectedOptionRef.current = optKey;
+      announce(`Selected Option ${optKey}. Click Submit Answer or say submit to confirm.`, 'polite');
+      speakText(`You selected option ${optKey}. Say submit or click Submit Answer to confirm.`, () => {
+        playBeacon('listening');
+        startVoiceListening();
+      });
+    },
+    [hasSubmitted, announce, speakText, playBeacon, startVoiceListening]
+  );
 
   /**
    * Submits an answer with synchronous deduplication and progressive feedback.
@@ -866,13 +887,29 @@ export function VoicePracticeScreen() {
           );
           return true;
         }
+
+        if (parsed.command === 'submit') {
+          const opt = selectedOptionRef.current;
+          if (opt && !isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
+            submitAnswer(opt);
+            return true;
+          } else if (!opt) {
+            const noOptMsg = 'Please choose an option first before submitting.';
+            announce(noOptMsg, 'assertive');
+            speakText(noOptMsg, () => {
+              playBeacon('listening');
+              startVoiceListening();
+            });
+            return true;
+          }
+        }
       }
 
-      // --- 2. Answering Option (A, B, C, D) ---
+      // --- 2. Selecting Option (A, B, C, D) ---
       if (parsed.type === 'option') {
         // Guard: only accept if not already submitting or already answered
         if (!isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
-          submitAnswer(parsed.option);
+          handleSelectOption(parsed.option);
           return true;
         }
       }
@@ -894,6 +931,7 @@ export function VoicePracticeScreen() {
     handlePreviousQuestion,
     speakText,
     announce,
+    handleSelectOption,
     submitAnswer
   ]);
 
@@ -929,10 +967,14 @@ export function VoicePracticeScreen() {
 
     if (parsed && parsed.type === 'option') {
       if (!isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
-        submitAnswer(parsed.option);
+        handleSelectOption(parsed.option);
       }
     } else if (parsed && parsed.type === 'control') {
-      if (parsed.command === 'repeat') {
+      if (parsed.command === 'submit') {
+        if (selectedOptionRef.current && !isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
+          submitAnswer(selectedOptionRef.current);
+        }
+      } else if (parsed.command === 'repeat') {
         readCurrentQuestion(curQ, currentIndexRef.current, questionsRef.current.length);
       } else if (parsed.command === 'skip') {
         advanceToNextQuestion();
@@ -978,13 +1020,13 @@ export function VoicePracticeScreen() {
       if (['A', 'B', 'C', 'D'].includes(key)) {
         e.preventDefault();
         if (!isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
-          submitAnswer(key);
+          handleSelectOption(key);
         }
       } else if (['1', '2', '3', '4'].includes(key)) {
         e.preventDefault();
         const map: Record<string, string> = { '1': 'A', '2': 'B', '3': 'C', '4': 'D' };
         if (!isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
-          submitAnswer(map[key]);
+          handleSelectOption(map[key]);
         }
       } else if (e.code === 'Space') {
         e.preventDefault();
@@ -1638,17 +1680,17 @@ export function VoicePracticeScreen() {
                   tabIndex={0}
                   onClick={() => {
                     if (!isSubmittingRef.current && !hasAnsweredCurrentQuestionRef.current) {
-                      submitAnswer(opt.key);
+                      handleSelectOption(opt.key);
                     }
                   }}
                   onKeyDown={(e) => {
                     if (
                       !isSubmittingRef.current &&
                       !hasAnsweredCurrentQuestionRef.current &&
-                      (e.key === 'Enter' || e.key === ' ')
+                      (e.key === ' ' || e.key === 'Enter')
                     ) {
                       e.preventDefault();
-                      submitAnswer(opt.key);
+                      handleSelectOption(opt.key);
                     }
                   }}
                   className={`w-full p-4 rounded-xl border-2 transition-all cursor-pointer flex items-center justify-between gap-4 text-left ${borderStyle} focus:outline-hidden focus:ring-2 focus:ring-[#1749E8]`}
