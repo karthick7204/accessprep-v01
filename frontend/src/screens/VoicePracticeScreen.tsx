@@ -478,12 +478,19 @@ export function VoicePracticeScreen() {
       const correctOptKey = `option_${correctAnswer.toLowerCase()}` as keyof Question;
       const correctOptText = (curQ as any)[correctOptKey] || '';
 
-      // Build feedback
+      // Build feedback: explain the academic concept thoroughly if the answer is incorrect
       const feedback = isCorrect
         ? `Correct! Option ${optKey}. You earned three marks.`
-        : `Incorrect. You chose Option ${optKey}. The correct answer is Option ${correctAnswer}: ${correctOptText}.`;
+        : `Incorrect. You chose Option ${optKey}. The verified correct answer is Option ${correctAnswer}: ${correctOptText}.${
+            explanation ? ` Here is the explanation: ${explanation}.` : ''
+          } Click Next Question or say next to continue.`;
 
-      announce(isCorrect ? 'Correct! (+3 Marks)' : `Incorrect. Correct is Option ${correctAnswer}`, 'assertive');
+      announce(
+        isCorrect
+          ? 'Correct! (+3 Marks)'
+          : `Incorrect. Correct is Option ${correctAnswer}.${explanation ? ` Explanation: ${explanation}` : ''}`,
+        'assertive'
+      );
       playBeacon(isCorrect ? 'success' : 'alert');
 
       // Clear any pending advancement timer
@@ -503,12 +510,21 @@ export function VoicePracticeScreen() {
         advanceToNextQuestion();
       };
 
-      // Auto-advance safely after spoken feedback (3s timeout safeguard if TTS onEnd does not fire)
-      advanceTimerRef.current = setTimeout(doAdvance, 3200);
-
-      speakText(feedback, () => {
-        doAdvance();
-      });
+      if (isCorrect) {
+        // Correct answer: brief feedback then auto-advance
+        advanceTimerRef.current = setTimeout(doAdvance, 3500);
+        speakText(feedback, () => {
+          doAdvance();
+        });
+      } else {
+        // Incorrect answer: speak the complete explanation so the candidate learns
+        speakText(feedback, () => {
+          playBeacon('listening');
+          startVoiceListening();
+          // Provide 8 seconds review time after explanation finishes before automatic progression
+          advanceTimerRef.current = setTimeout(doAdvance, 8000);
+        });
+      }
     },
     [user?.id, stopSpeaking, announce, playBeacon, speakText, startVoiceListening, advanceToNextQuestion]
   );
